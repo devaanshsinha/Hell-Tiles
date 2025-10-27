@@ -1,0 +1,28 @@
+# --- Unity generated ---
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+sysinfo.txt
+
+# --- IDE/OS noise ---
+.vscode/
+.idea/
+*.suo
+*.user
+*.pidb
+*.booproj
+*.csproj
+*.sln
+.DS_Store
+Thumbs.db
+
+# --- Keep these tracked ---
+!Assets/
+!Packages/
+!ProjectSettings/
+
