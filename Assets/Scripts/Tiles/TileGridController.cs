@@ -78,16 +78,28 @@ namespace HellTiles.Tiles
 
         public bool TryGetNearestWalkableCell(Vector3 worldPosition, out Vector3Int cellPosition)
         {
-            cellPosition = walkableTilemap.WorldToCell(worldPosition);
-            if (IsWalkable(cellPosition))
+            var bounds = walkableTilemap.cellBounds;
+            if (bounds.size.x == 0 || bounds.size.y == 0 || bounds.size.z == 0)
             {
+                cellPosition = Vector3Int.zero;
+                return false;
+            }
+
+            var initialCell = walkableTilemap.WorldToCell(worldPosition);
+            initialCell.x = Mathf.Clamp(initialCell.x, bounds.xMin, bounds.xMax - 1);
+            initialCell.y = Mathf.Clamp(initialCell.y, bounds.yMin, bounds.yMax - 1);
+            initialCell.z = Mathf.Clamp(initialCell.z, bounds.zMin, bounds.zMax - 1);
+
+            if (IsWalkable(initialCell))
+            {
+                cellPosition = initialCell;
                 return true;
             }
 
-            // Fallback search: breadth-first until we find a walkable tile.
-            var visited = new HashSet<Vector3Int> { cellPosition };
+            // Fallback search: breadth-first within tilemap bounds until we find a walkable tile.
+            var visited = new HashSet<Vector3Int> { initialCell };
             var searchQueue = new Queue<Vector3Int>();
-            searchQueue.Enqueue(cellPosition);
+            searchQueue.Enqueue(initialCell);
 
             while (searchQueue.Count > 0)
             {
@@ -95,7 +107,7 @@ namespace HellTiles.Tiles
                 foreach (var dir in FourDirections)
                 {
                     var next = current + dir;
-                    if (!visited.Add(next))
+                    if (!bounds.Contains(next) || !visited.Add(next))
                     {
                         continue;
                     }
@@ -110,6 +122,7 @@ namespace HellTiles.Tiles
                 }
             }
 
+            cellPosition = initialCell;
             return false;
         }
 
