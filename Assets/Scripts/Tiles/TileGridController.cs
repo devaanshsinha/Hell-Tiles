@@ -14,7 +14,6 @@ namespace HellTiles.Tiles
         [SerializeField] private Grid grid = default!;
         [SerializeField] private Tilemap walkableTilemap = default!;
         [SerializeField] private Tilemap? blockedTilemap;
-        [SerializeField] private Vector3 cellCenterOffset = Vector3.zero;
         [SerializeField] private TileBase[]? explicitWalkableTiles;
         [SerializeField] private TileBase[]? explicitBlockedTiles;
 
@@ -65,19 +64,16 @@ namespace HellTiles.Tiles
 
         public Vector3 CellToWorldCenter(Vector3Int cellPosition)
         {
-            var position = grid != null
-                ? grid.GetCellCenterWorld(cellPosition)
-                : walkableTilemap.GetCellCenterWorld(cellPosition);
-
-            return position + cellCenterOffset;
+            return grid != null
+                ? grid.CellToWorld(cellPosition) + grid.cellSize * 0.5f
+                : walkableTilemap.CellToWorld(cellPosition) + walkableTilemap.cellSize * 0.5f;
         }
 
         public Vector3Int WorldToCell(Vector3 worldPosition)
         {
-            var adjustedPosition = worldPosition - cellCenterOffset;
             return grid != null
-                ? grid.WorldToCell(adjustedPosition)
-                : walkableTilemap.WorldToCell(adjustedPosition);
+                ? grid.WorldToCell(worldPosition)
+                : walkableTilemap.WorldToCell(worldPosition);
         }
 
         public bool TryGetNearestWalkableCell(Vector3 worldPosition, out Vector3Int cellPosition)
