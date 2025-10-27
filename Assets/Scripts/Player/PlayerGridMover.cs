@@ -17,7 +17,7 @@ namespace HellTiles.Player
         [SerializeField, Min(0.01f)] private float hopDuration = 0.18f;
         [SerializeField] private AnimationCurve hopCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
         [SerializeField, Range(0f, 1f)] private float inputDeadzone = 0.2f;
-        [SerializeField] private bool snapToNearestWalkable = true;
+        [SerializeField] private bool snapToNearestWalkable;
 
         private Vector3Int currentCell;
         private bool isMoving;
