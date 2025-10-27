@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using HellTiles.Tiles;
 
+#nullable enable
+
 namespace HellTiles.Player
 {
     [RequireComponent(typeof(SpriteRenderer))]
