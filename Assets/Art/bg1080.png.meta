@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7eab71c53fa364575b0170dde48775a2
+guid: 1fedfa90c124d4e2bbcb0edcb49e6992
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 919790619360823383
-    second: 343-3434119_overworld-pokemon-trainer-fusion-with-hydreigon-pokemon-red_0
+      213: -1947849855472530730
+    second: bg1080_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 343-3434119_overworld-pokemon-trainer-fusion-with-hydreigon-pokemon-red_0
+      name: bg1080_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 357
-        height: 409
-      alignment: 9
-      pivot: {x: 0.5, y: 0.3879467}
+        width: 1920
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7580dbee1b0c3cc00800000000000000
-      internalID: 919790619360823383
+      spriteID: 6da83c860e8d7f4e0800000000000000
+      internalID: -1947849855472530730
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9aaa5a13449784c13a68f9e24944e1ae
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      343-3434119_overworld-pokemon-trainer-fusion-with-hydreigon-pokemon-red_0: 919790619360823383
+      bg1080_0: -1947849855472530730
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
