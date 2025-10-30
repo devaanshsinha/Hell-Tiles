@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 #nullable enable
 
@@ -20,6 +21,7 @@ namespace HellTiles.Player
         [SerializeField] private Color hitTint = new(1f, 0.35f, 0.35f, 1f);
         [SerializeField, Tooltip("Seconds spent invulnerable after taking damage.")] private float invulnerabilityDuration = 1.5f;
         [SerializeField, Tooltip("How many visible flashes to play while invulnerable.")] private int blinkCount = 3;
+        [SerializeField, Tooltip("Scene to load when all hearts are lost.")] private string gameOverSceneName = "Game Over";
 
         [Header("UI")]
         [SerializeField] private List<Image> heartIcons = new();
@@ -80,6 +82,11 @@ namespace HellTiles.Player
             }
 
             invulnerabilityRoutine = StartCoroutine(InvulnerabilityWindow());
+
+            if (CurrentHearts <= 0)
+            {
+                LoadGameOverScene();
+            }
         }
 
         private IEnumerator InvulnerabilityWindow()
@@ -124,6 +131,28 @@ namespace HellTiles.Player
 
                 heartIcons[i].enabled = i < CurrentHearts;
             }
+        }
+
+        private void LoadGameOverScene()
+        {
+            if (string.IsNullOrWhiteSpace(gameOverSceneName))
+            {
+                Debug.LogWarning($"{nameof(PlayerHealth)} has no Game Over scene name configured.", this);
+                return;
+            }
+
+            if (SceneManager.GetActiveScene().name == gameOverSceneName)
+            {
+                return;
+            }
+
+            if (!Application.CanStreamedLevelBeLoaded(gameOverSceneName))
+            {
+                Debug.LogWarning($"Scene '{gameOverSceneName}' is not added to Build Settings.", this);
+                return;
+            }
+
+            SceneManager.LoadScene(gameOverSceneName);
         }
     }
 }
