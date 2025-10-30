@@ -1,4 +1,5 @@
 using UnityEngine;
+using HellTiles.Player;
 
 #nullable enable
 
@@ -7,7 +8,7 @@ namespace HellTiles.Projectiles
     /// <summary>
     /// Moves towards a target position at a constant speed and despawns after travelling a max distance.
     /// </summary>
-    public class HomingProjectile : MonoBehaviour
+    public class BasicProjectile : MonoBehaviour
     {
         [SerializeField] private float speed = 6f;
         [SerializeField] private float maxLifetime = 8f;
@@ -129,6 +130,18 @@ namespace HellTiles.Projectiles
                 moveDirection = Vector3.up;
             }
             hasTarget = true;
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            var health = other.GetComponent<PlayerHealth>() ?? other.GetComponentInParent<PlayerHealth>();
+            if (health == null)
+            {
+                return;
+            }
+
+            health.TakeHit();
+            Destroy(gameObject);
         }
     }
 }

@@ -7,22 +7,30 @@ using UnityEngine.UI;
 
 namespace HellTiles.Player
 {
+    /// <summary>
+    /// Tracks player health, handles invulnerability blink, and updates UI heart icons.
+    /// </summary>
     public class PlayerHealth : MonoBehaviour
     {
-        [SerializeField] private int maxHearts = 3;
-        [SerializeField] private SpriteRenderer playerSprite = default!;
+        [Header("Health")]
+        [SerializeField, Min(0)] private int maxHearts = 3;
+
+        [Header("Visuals")]
+        [SerializeField] private SpriteRenderer? playerSprite;
+        [SerializeField] private Color hitTint = new(1f, 0.35f, 0.35f, 1f);
+        [SerializeField, Tooltip("Seconds spent invulnerable after taking damage.")] private float invulnerabilityDuration = 1.5f;
+        [SerializeField, Tooltip("How many visible flashes to play while invulnerable.")] private int blinkCount = 3;
+
+        [Header("UI")]
         [SerializeField] private List<Image> heartIcons = new();
-        [SerializeField] private float invulnerabilityDuration = 1.5f;
-        [SerializeField] private float blinkInterval = 0.2f;
-        [SerializeField] private Color hitTint = new(1f, 0.3f, 0.3f, 1f);
 
-        private int currentHearts;
-        private bool isInvulnerable;
-        private Color defaultColor = Color.white;
-        private Coroutine? invulnerabilityRoutine;
-
-        public int CurrentHearts => currentHearts;
         public int MaxHearts => maxHearts;
+        public int CurrentHearts { get; private set; }
+        public bool IsInvulnerable => isInvulnerable;
+
+        private Color defaultColor = Color.white;
+        private bool isInvulnerable;
+        private Coroutine? invulnerabilityRoutine;
 
         private void Awake()
         {
@@ -31,9 +39,13 @@ namespace HellTiles.Player
                 playerSprite = GetComponentInChildren<SpriteRenderer>();
             }
 
-            defaultColor = playerSprite != null ? playerSprite.color : Color.white;
-            currentHearts = Mathf.Clamp(maxHearts, 0, maxHearts);
-            RefreshHeartsUI();
+            if (playerSprite != null)
+            {
+                defaultColor = playerSprite.color;
+            }
+
+            CurrentHearts = Mathf.Clamp(maxHearts, 0, maxHearts);
+            RefreshHeartUI();
         }
 
         private void OnDisable()
@@ -54,13 +66,13 @@ namespace HellTiles.Player
 
         public void TakeHit()
         {
-            if (isInvulnerable || currentHearts <= 0)
+            if (isInvulnerable || CurrentHearts <= 0)
             {
                 return;
             }
 
-            currentHearts = Mathf.Max(0, currentHearts - 1);
-            RefreshHeartsUI();
+            CurrentHearts = Mathf.Max(0, CurrentHearts - 1);
+            RefreshHeartUI();
 
             if (invulnerabilityRoutine != null)
             {
@@ -72,23 +84,23 @@ namespace HellTiles.Player
 
         private IEnumerator InvulnerabilityWindow()
         {
-            isInvulnerable = true;
-
             if (playerSprite == null)
             {
                 yield break;
             }
 
-            var elapsed = 0f;
-            var visible = true;
+            isInvulnerable = true;
 
-            while (elapsed < invulnerabilityDuration)
+            var flashes = Mathf.Max(1, blinkCount);
+            var halfStep = invulnerabilityDuration / (flashes * 2f);
+
+            for (int i = 0; i < flashes; i++)
             {
-                playerSprite.color = visible ? hitTint : defaultColor;
-                visible = !visible;
-                var wait = Mathf.Min(blinkInterval, invulnerabilityDuration - elapsed);
-                elapsed += wait;
-                yield return new WaitForSeconds(wait);
+                playerSprite.color = hitTint;
+                yield return new WaitForSeconds(halfStep);
+
+                playerSprite.color = defaultColor;
+                yield return new WaitForSeconds(halfStep);
             }
 
             playerSprite.color = defaultColor;
@@ -96,7 +108,7 @@ namespace HellTiles.Player
             invulnerabilityRoutine = null;
         }
 
-        private void RefreshHeartsUI()
+        private void RefreshHeartUI()
         {
             if (heartIcons == null || heartIcons.Count == 0)
             {
@@ -110,7 +122,7 @@ namespace HellTiles.Player
                     continue;
                 }
 
-                heartIcons[i].enabled = i < currentHearts;
+                heartIcons[i].enabled = i < CurrentHearts;
             }
         }
     }

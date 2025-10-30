@@ -10,7 +10,7 @@ namespace HellTiles.Projectiles
     /// </summary>
     public class ProjectileSpawner : MonoBehaviour
     {
-        [SerializeField] private HomingProjectile projectilePrefab = default!;
+        [SerializeField] private BasicProjectile projectilePrefab = default!;
         [SerializeField] private Transform playerTransform = default!;
         [SerializeField] private Vector2 spawnAreaSize = new(12f, 8f);
         [SerializeField] private float spawnInterval = 1.5f;
