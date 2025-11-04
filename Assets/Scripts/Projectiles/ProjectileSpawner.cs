@@ -19,6 +19,7 @@ namespace HellTiles.Projectiles
         [SerializeField] private bool spawnFromPerimeter = true;
         [SerializeField] private bool trackPlayerContinuously;
         [SerializeField] private float initialDelay = 0.5f;
+        [SerializeField] private float jumpStartDelay = 2f;
 
         private Coroutine? spawnRoutine;
 
@@ -45,9 +46,10 @@ namespace HellTiles.Projectiles
 
         private IEnumerator SpawnLoop()
         {
-            if (initialDelay > 0f)
+            var combinedDelay = Mathf.Max(0f, initialDelay + jumpStartDelay);
+            if (combinedDelay > 0f)
             {
-                yield return new WaitForSeconds(initialDelay);
+                yield return new WaitForSeconds(combinedDelay);
             }
 
             var wait = new WaitForSeconds(spawnInterval);
