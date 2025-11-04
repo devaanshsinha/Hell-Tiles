@@ -2,7 +2,7 @@
 
 ## Current Status
 
-The foundational **Hell Tiles** Unity project setup is complete and the first gameplay scaffolding is now in place. A placeholder tilemap arena and player sprite exist in `SampleScene`, and the player can hop one tile at a time using the new Input System. This file keeps AI assistants aligned with the actual progress so they can build on the latest implementation.
+The foundational **Hell Tiles** Unity project setup is complete and a playable prototype is live. `SampleScene` contains a placeholder tilemap arena, a controllable player that hops between tiles, projectile spawners that fire toward the player, a three-heart health system with blinking feedback, and scene transitions between `New Game`, gameplay, and `Game Over`. This file keeps AI assistants aligned with real project progress so future work builds on the latest implementation.
 
 ---
 
@@ -24,21 +24,25 @@ Planned features (from Conner's design notes):
 ## Current Implementation
 
 - Unity project created locally (version **6.2 / 6000.2.9f1**) and source control configured (Git, GitHub remote, Git LFS, Unity Smart Merge).
-- Placeholder art added in `Assets/Art/`:
-  - `background_placeholder.png`
-  - `tile_placeholder.png` (used for walkable tiles via Tilemap)
-  - `player_placeholder.png`
-- `SampleScene.unity` contains:
-  - `Grid` + Tilemap with a 6×4 walkable layout painted from the placeholder tile.
-  - Background sprite renderer positioned beneath the grid.
-  - `Player` GameObject with placeholder sprite and `Rigidbody2D` (kinematic).
+- Placeholder art added in `Assets/Art/` for background, player, and tile sprites.
+- `SampleScene.unity` currently includes:
+  - `Grid` + Tilemap with a 6×4 walkable layout.
+  - Background sprite renderer positioned beneath the board.
+  - `Player` GameObject (sprite + `Rigidbody2D`) with grid-based movement and `PlayerHealth` (3 hearts, blinking invulnerability).
+  - Projectile system that spawns `BasicProjectile` prefabs at the screen perimeter and moves them toward the player.
+- Scene flow:
+  - `New Game` scene listens for the spacebar to start gameplay (`NewGameSceneController`).
+  - `SampleScene` loads `Game Over` when hearts reach zero (`PlayerHealth`).
+  - `Game Over` scene listens for spacebar to return to `New Game` (`GameOverSceneController`).
 - Scripts (C#):
-  - `Assets/Scripts/Tiles/TileGridController.cs`  
-    Handles grid lookups, walkable/blocked logic, and exposes cell/world conversions that align with the Grid component.
-  - `Assets/Scripts/Player/PlayerGridMover.cs`  
-    Reads the Input System `Player/Move` action (WASD/Left Stick), resolves cardinal input, and tweens the player one tile at a time while respecting walkable tiles.
-- Input: `Assets/InputSystem_Actions.inputactions` (default template) supplies the `Move` action bound to keyboard/Gamepad; referenced via `InputActionReference`.
-- Player movement is live in Play Mode—pressing WASD or a gamepad stick hops the character exactly one painted tile, blocking moves where no tile exists.
+  - `Assets/Scripts/Tiles/TileGridController.cs` – grid queries and walkable checks.
+  - `Assets/Scripts/Player/PlayerGridMover.cs` – input-driven tile hopping.
+  - `Assets/Scripts/Player/PlayerHealth.cs` – heart tracking, hit blink, scene transition.
+  - `Assets/Scripts/Projectiles/BasicProjectile.cs` – straight-line projectiles that damage the player and self-destruct.
+  - `Assets/Scripts/Projectiles/ProjectileSpawner.cs` – spawns projectiles from perimeter or circular ring.
+  - `Assets/Scripts/UI/NewGameSceneController.cs`, `GameOverSceneController.cs` – space-to-advance scene controllers.
+- Input: `Assets/InputSystem_Actions.inputactions` (default template) supplies the `Move` action bound to keyboard/gamepad.
+- Layer collisions configured so projectiles only hit the player.
 
 ---
 
@@ -66,7 +70,7 @@ Hell Tiles/
 └── chat.md
 ```
 
-Structure is now partially populated with placeholder art and first gameplay scripts.
+Structure is now populated with placeholder art, prototype scripts, and initial UI scenes.
 
 ---
 
@@ -90,14 +94,19 @@ Structure is now partially populated with placeholder art and first gameplay scr
 
 ## Instructor Feedback (as of Oct 23, 2025)
 
-Conner’s notes from instructor feedback include:
+Conner’s updated notes include previously listed directives plus the latest to-do items:
 
-- Add **"juice"**: visual/audio polish like screen shake, explosions, tile effects.
-- Add **positive feedback loop**: permanent upgrades or progression through shop system.
-- Add **Exit Tile** after survival period for level progression.
-- Progress saves after every level.
+- Implement tile system with positive/neutral/negative tiles (heart, angel, coin pickups; neutral tile; spike, push, wall, cracked tiles).
+- Randomly replace tiles with “juice” effects; add bounce/juice when stepping on tiles and during player movement.
+- Add instructions/tutorial level and a main menu.
+- Add hi-score tracking based on survival time; show hi-score/time on Game Over.
+- Add score multiplier for hearts kept and bonus points for near misses.
+- Add projectile difficulty scaling and “juice” for projectile spawning, near misses, and player impacts.
+- Make hitbox more lenient, overall pace faster, and delay projectile spawning with an opening countdown.
+- Add level progression with unique layouts that introduce mechanics gradually.
+- Ensure positive feedback is immediate and noticeable.
 
-These are design directives to guide future implementation — none of these features are implemented yet.
+Most of these directives are pending implementation; focus is on incrementally adding systems while preserving current prototype functionality.
 
 ---
 

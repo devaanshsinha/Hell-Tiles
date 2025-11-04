@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using HellTiles.UI;
 
 #nullable enable
 
@@ -47,6 +48,7 @@ namespace HellTiles.Player
             }
 
             CurrentHearts = Mathf.Clamp(maxHearts, 0, maxHearts);
+            GameSessionData.ResetCurrentRun();
             RefreshHeartUI();
         }
 
@@ -85,6 +87,7 @@ namespace HellTiles.Player
 
             if (CurrentHearts <= 0)
             {
+                SurvivalTimer.Instance?.StopAndStore();
                 LoadGameOverScene();
             }
         }
