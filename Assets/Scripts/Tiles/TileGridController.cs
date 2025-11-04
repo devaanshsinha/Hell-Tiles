@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -19,6 +20,7 @@ namespace HellTiles.Tiles
 
         private readonly HashSet<TileBase> walkableTileSet = new();
         private readonly HashSet<TileBase> blockedTileSet = new();
+        private readonly Dictionary<Vector3Int, Coroutine> activeTileTweens = new();
 
         private void Awake()
         {
@@ -183,6 +185,43 @@ namespace HellTiles.Tiles
                     yield return position;
                 }
             }
+        }
+
+        public void PlayTileBounce(Vector3Int cell, float depth, float duration)
+        {
+            if (depth <= 0f || duration <= 0f)
+            {
+                return;
+            }
+
+            if (!walkableTilemap.HasTile(cell))
+            {
+                return;
+            }
+
+            if (activeTileTweens.TryGetValue(cell, out var routine))
+            {
+                StopCoroutine(routine);
+            }
+
+            activeTileTweens[cell] = StartCoroutine(TileBounceRoutine(cell, depth, duration));
+        }
+
+        private IEnumerator TileBounceRoutine(Vector3Int cell, float depth, float duration)
+        {
+            var elapsed = 0f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                var normalized = Mathf.Clamp01(elapsed / duration);
+                var offset = Mathf.Sin(normalized * Mathf.PI) * -depth;
+                var matrix = Matrix4x4.TRS(new Vector3(0f, offset, 0f), Quaternion.identity, Vector3.one);
+                walkableTilemap.SetTransformMatrix(cell, matrix);
+                yield return null;
+            }
+
+            walkableTilemap.SetTransformMatrix(cell, Matrix4x4.identity);
+            activeTileTweens.Remove(cell);
         }
 
         private static readonly Vector3Int[] FourDirections =
