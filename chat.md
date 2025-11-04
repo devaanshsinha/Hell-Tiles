@@ -28,8 +28,12 @@ Planned features (from Conner's design notes):
 - `SampleScene.unity` currently includes:
   - `Grid` + Tilemap with a 6×4 walkable layout.
   - Background sprite renderer positioned beneath the board.
-  - `Player` GameObject (sprite + `Rigidbody2D`) with grid-based movement and `PlayerHealth` (3 hearts, blinking invulnerability).
+  - `Player` GameObject (sprite + `Rigidbody2D`) with grid-based movement (`PlayerGridMover`) and health (`PlayerHealth`, three-heart UI, invulnerability bounce).
   - Projectile system that spawns `BasicProjectile` prefabs at the screen perimeter and moves them toward the player.
+  - `HeartSpawner` manager that periodically instantiates `HeartPickup` prefabs on random walkable tiles; pickups heal the player if they have fewer than three hearts.
+- UI elements:
+  - Canvas with TextMeshPro timer in the top-right driven by `SurvivalTimer`.
+  - Hearts UI panel linked to `PlayerHealth`.
 - Scene flow:
   - `New Game` scene listens for the spacebar to start gameplay (`NewGameSceneController`).
   - `SampleScene` loads `Game Over` when hearts reach zero (`PlayerHealth`).
@@ -40,7 +44,8 @@ Planned features (from Conner's design notes):
   - `Assets/Scripts/Player/PlayerHealth.cs` – heart tracking, hit blink, scene transition.
   - `Assets/Scripts/Projectiles/BasicProjectile.cs` – straight-line projectiles that damage the player and self-destruct.
   - `Assets/Scripts/Projectiles/ProjectileSpawner.cs` – spawns projectiles from perimeter or circular ring.
-  - `Assets/Scripts/UI/NewGameSceneController.cs`, `GameOverSceneController.cs` – space-to-advance scene controllers.
+  - `Assets/Scripts/Powerups/HeartPickup.cs`, `HeartSpawner.cs` – heart collectible behaviour and periodic spawning.
+  - `Assets/Scripts/UI/NewGameSceneController.cs`, `GameOverSceneController.cs`, `GameSessionData.cs`, `SurvivalTimer.cs` – scene flow, session timing, and UI display.
 - Input: `Assets/InputSystem_Actions.inputactions` (default template) supplies the `Move` action bound to keyboard/gamepad.
 - Layer collisions configured so projectiles only hit the player.
 

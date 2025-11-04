@@ -52,6 +52,23 @@ namespace HellTiles.Player
             RefreshHeartUI();
         }
 
+        public bool TryAddHearts(int amount)
+        {
+            if (amount <= 0)
+            {
+                return false;
+            }
+
+            if (CurrentHearts >= maxHearts)
+            {
+                return false;
+            }
+
+            CurrentHearts = Mathf.Min(maxHearts, CurrentHearts + amount);
+            RefreshHeartUI();
+            return true;
+        }
+
         private void OnDisable()
         {
             if (invulnerabilityRoutine != null)

@@ -28,8 +28,6 @@ namespace HellTiles.Player
 
         private Vector3Int currentCell;
         private bool isMoving;
-        private Coroutine? playerBounceRoutine;
-
         private void Awake()
         {
             if (gridController == null)
@@ -114,22 +112,24 @@ namespace HellTiles.Player
 
             ApplyPosition(worldTarget);
             currentCell = targetCell;
-            isMoving = false;
 
+            var maxLandingDuration = 0f;
             if (tileBounceDepth > 0f && tileBounceDuration > 0f)
             {
                 gridController.PlayTileBounce(targetCell, tileBounceDepth, tileBounceDuration);
+                maxLandingDuration = Mathf.Max(maxLandingDuration, tileBounceDuration);
             }
 
             if (playerBounceDepth > 0f && playerBounceDuration > 0f)
             {
-                if (playerBounceRoutine != null)
-                {
-                    StopCoroutine(playerBounceRoutine);
-                }
-
-                playerBounceRoutine = StartCoroutine(PlayerBounceRoutine(playerBounceDepth, playerBounceDuration));
+                yield return PlayerBounceRoutine(playerBounceDepth, playerBounceDuration, worldTarget);
             }
+            else if (maxLandingDuration > 0f)
+            {
+                yield return new WaitForSeconds(maxLandingDuration);
+            }
+
+            isMoving = false;
         }
 
         private void ApplyPosition(Vector3 position)
@@ -165,9 +165,8 @@ namespace HellTiles.Player
             return input.y > 0 ? Vector3Int.up : Vector3Int.down;
         }
 
-        private IEnumerator PlayerBounceRoutine(float depth, float duration)
+        private IEnumerator PlayerBounceRoutine(float depth, float duration, Vector3 basePosition)
         {
-            var basePosition = transform.position;
             var elapsed = 0f;
             while (elapsed < duration)
             {
@@ -179,7 +178,6 @@ namespace HellTiles.Player
             }
 
             ApplyPosition(basePosition);
-            playerBounceRoutine = null;
         }
     }
 }
