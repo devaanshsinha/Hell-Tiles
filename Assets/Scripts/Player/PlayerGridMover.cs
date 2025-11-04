@@ -20,10 +20,14 @@ namespace HellTiles.Player
         [SerializeField] private AnimationCurve hopCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
         [SerializeField, Range(0f, 1f)] private float inputDeadzone = 0.2f;
         [SerializeField] private bool snapToNearestWalkable;
+        [Header("Landing Bounce")]
+        [SerializeField, Min(0f)] private float playerBounceDepth = 0.1f;
+        [SerializeField, Min(0f)] private float playerBounceDuration = 0.3f;
+        [SerializeField, Min(0f)] private float tileBounceDepth = 0.05f;
+        [SerializeField, Min(0f)] private float tileBounceDuration = 0.3f;
 
         private Vector3Int currentCell;
         private bool isMoving;
-
         private void Awake()
         {
             if (gridController == null)
@@ -108,6 +112,23 @@ namespace HellTiles.Player
 
             ApplyPosition(worldTarget);
             currentCell = targetCell;
+
+            var maxLandingDuration = 0f;
+            if (tileBounceDepth > 0f && tileBounceDuration > 0f)
+            {
+                gridController.PlayTileBounce(targetCell, tileBounceDepth, tileBounceDuration);
+                maxLandingDuration = Mathf.Max(maxLandingDuration, tileBounceDuration);
+            }
+
+            if (playerBounceDepth > 0f && playerBounceDuration > 0f)
+            {
+                yield return PlayerBounceRoutine(playerBounceDepth, playerBounceDuration, worldTarget);
+            }
+            else if (maxLandingDuration > 0f)
+            {
+                yield return new WaitForSeconds(maxLandingDuration);
+            }
+
             isMoving = false;
         }
 
@@ -142,6 +163,21 @@ namespace HellTiles.Player
             }
 
             return input.y > 0 ? Vector3Int.up : Vector3Int.down;
+        }
+
+        private IEnumerator PlayerBounceRoutine(float depth, float duration, Vector3 basePosition)
+        {
+            var elapsed = 0f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                var normalized = Mathf.Clamp01(elapsed / duration);
+                var offset = Mathf.Sin(normalized * Mathf.PI) * -depth;
+                ApplyPosition(new Vector3(basePosition.x, basePosition.y + offset, basePosition.z));
+                yield return null;
+            }
+
+            ApplyPosition(basePosition);
         }
     }
 }
