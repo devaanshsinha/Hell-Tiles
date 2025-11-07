@@ -8,13 +8,13 @@ namespace HellTiles.Powerups
 {
     public class HeartSpawner : MonoBehaviour
     {
-        [SerializeField] private TileGridController gridController = default!;
+        [SerializeField] private TileGridController gridController = default!; // tilemap reference
         [SerializeField] private HeartPickup heartPrefab = default!;
         [SerializeField] private float spawnInterval = 15f;
         [SerializeField] private int maxSimultaneousHearts = 1;
         [SerializeField] private float initialDelay = 5f;
 
-        private readonly Dictionary<Vector3Int, HeartPickup> activeHearts = new();
+        private readonly Dictionary<Vector3Int, HeartPickup> activeHearts = new(); // track spawned pickups
         private readonly List<Vector3Int> walkableCells = new();
         private float spawnTimer;
 
@@ -45,7 +45,7 @@ namespace HellTiles.Powerups
                 return;
             }
 
-            spawnTimer -= Time.deltaTime;
+            spawnTimer -= Time.deltaTime; // tick until next spawn
             if (spawnTimer > 0f)
             {
                 return;
@@ -75,7 +75,7 @@ namespace HellTiles.Powerups
                 }
             }
 
-            var attempts = walkableCells.Count;
+            var attempts = walkableCells.Count; // avoid infinite loops if grid is crowded
             while (attempts-- > 0)
             {
                 var cell = walkableCells[Random.Range(0, walkableCells.Count)];

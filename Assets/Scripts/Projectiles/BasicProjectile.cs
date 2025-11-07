@@ -10,7 +10,7 @@ namespace HellTiles.Projectiles
     /// </summary>
     public class BasicProjectile : MonoBehaviour
     {
-        [SerializeField] private float speed = 6f;
+        [SerializeField] private float speed = 6f; // units per second
         [SerializeField] private float maxLifetime = 8f;
         [SerializeField] private float maxTravelDistance = 20f;
         [SerializeField] private Rigidbody2D? body2D;
@@ -141,7 +141,7 @@ namespace HellTiles.Projectiles
             }
 
             health.TakeHit();
-            Destroy(gameObject);
+            Destroy(gameObject); // remove projectile after a hit
         }
     }
 }

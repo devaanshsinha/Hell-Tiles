@@ -189,6 +189,7 @@ namespace HellTiles.Tiles
 
         public void PlayTileBounce(Vector3Int cell, float depth, float duration)
         {
+            // Ignore bounce requests on invalid tiles.
             if (depth <= 0f || duration <= 0f)
             {
                 return;
@@ -209,6 +210,7 @@ namespace HellTiles.Tiles
 
         private IEnumerator TileBounceRoutine(Vector3Int cell, float depth, float duration)
         {
+            // Simple sine wave to fake squash and stretch.
             var elapsed = 0f;
             while (elapsed < duration)
             {

@@ -11,7 +11,7 @@ namespace HellTiles.Player
     public class PlayerGridMover : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private TileGridController gridController = default!;
+        [SerializeField] private TileGridController gridController = default!; // main grid logic
         [SerializeField] private InputActionReference moveAction = default!;
         [SerializeField] private Rigidbody2D? body2D;
 
@@ -78,7 +78,7 @@ namespace HellTiles.Player
                 return;
             }
 
-            var input = moveAction.action.ReadValue<Vector2>();
+            var input = moveAction.action.ReadValue<Vector2>(); // read WASD / stick
             var direction = ResolveCardinalDirection(input);
             if (direction == Vector3Int.zero)
             {
@@ -167,6 +167,7 @@ namespace HellTiles.Player
 
         private IEnumerator PlayerBounceRoutine(float depth, float duration, Vector3 basePosition)
         {
+            // Dip the player sprite slightly then return to rest.
             var elapsed = 0f;
             while (elapsed < duration)
             {

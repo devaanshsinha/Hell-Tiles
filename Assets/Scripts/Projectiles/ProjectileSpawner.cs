@@ -12,7 +12,7 @@ namespace HellTiles.Projectiles
     {
         [SerializeField] private BasicProjectile projectilePrefab = default!;
         [SerializeField] private Transform playerTransform = default!;
-        [SerializeField] private Vector2 spawnAreaSize = new(12f, 8f);
+        [SerializeField] private Vector2 spawnAreaSize = new(12f, 8f); // width/height around the spawner
         [SerializeField] private float spawnInterval = 1.5f;
         [SerializeField] private bool useCircleSpawn;
         [SerializeField] private float spawnRadius = 8f;
@@ -21,7 +21,15 @@ namespace HellTiles.Projectiles
         [SerializeField] private float initialDelay = 0.5f;
         [SerializeField] private float jumpStartDelay = 2f;
 
+        [Header("Optional Homing Projectiles")]
+        [SerializeField] private bool spawnHomingProjectiles;
+        [SerializeField] private BasicProjectile? homingProjectilePrefab;
+        [SerializeField] private float homingSpawnInterval = 15f;
+        [SerializeField] private float homingInitialDelay = 2f;
+        [SerializeField] private bool homingTracksPlayer = true;
+
         private Coroutine? spawnRoutine;
+        private Coroutine? homingRoutine;
 
         private void OnEnable()
         {
@@ -33,6 +41,11 @@ namespace HellTiles.Projectiles
             }
 
             spawnRoutine = StartCoroutine(SpawnLoop());
+
+            if (spawnHomingProjectiles && homingProjectilePrefab != null)
+            {
+                homingRoutine = StartCoroutine(HomingSpawnLoop());
+            }
         }
 
         private void OnDisable()
@@ -42,11 +55,17 @@ namespace HellTiles.Projectiles
                 StopCoroutine(spawnRoutine);
                 spawnRoutine = null;
             }
+
+            if (homingRoutine != null)
+            {
+                StopCoroutine(homingRoutine);
+                homingRoutine = null;
+            }
         }
 
         private IEnumerator SpawnLoop()
         {
-            var combinedDelay = Mathf.Max(0f, initialDelay + jumpStartDelay);
+            var combinedDelay = Mathf.Max(0f, initialDelay + jumpStartDelay); // wait before first volley
             if (combinedDelay > 0f)
             {
                 yield return new WaitForSeconds(combinedDelay);
@@ -60,11 +79,46 @@ namespace HellTiles.Projectiles
             }
         }
 
+        private IEnumerator HomingSpawnLoop()
+        {
+            var delay = Mathf.Max(0f, homingInitialDelay);
+            if (delay > 0f)
+            {
+                yield return new WaitForSeconds(delay);
+            }
+
+            var wait = new WaitForSeconds(Mathf.Max(0.01f, homingSpawnInterval));
+            while (true)
+            {
+                SpawnHomingProjectile();
+                yield return wait;
+            }
+        }
+
         private void SpawnProjectile()
         {
             var spawnPoint = SelectSpawnPoint();
             var projectile = Instantiate(projectilePrefab, spawnPoint, Quaternion.identity);
             if (trackPlayerContinuously)
+            {
+                projectile.Initialise(playerTransform);
+            }
+            else
+            {
+                projectile.Initialise(playerTransform.position);
+            }
+        }
+
+        private void SpawnHomingProjectile()
+        {
+            if (homingProjectilePrefab == null)
+            {
+                return;
+            }
+
+            var spawnPoint = SelectSpawnPoint();
+            var projectile = Instantiate(homingProjectilePrefab, spawnPoint, Quaternion.identity);
+            if (homingTracksPlayer)
             {
                 projectile.Initialise(playerTransform);
             }

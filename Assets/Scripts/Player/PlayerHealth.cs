@@ -15,7 +15,7 @@ namespace HellTiles.Player
     public class PlayerHealth : MonoBehaviour
     {
         [Header("Health")]
-        [SerializeField, Min(0)] private int maxHearts = 3;
+        [SerializeField, Min(0)] private int maxHearts = 3; // total heart slots
 
         [Header("Visuals")]
         [SerializeField] private SpriteRenderer? playerSprite;
@@ -100,7 +100,7 @@ namespace HellTiles.Player
                 StopCoroutine(invulnerabilityRoutine);
             }
 
-            invulnerabilityRoutine = StartCoroutine(InvulnerabilityWindow());
+            invulnerabilityRoutine = StartCoroutine(InvulnerabilityWindow()); // start blink window
 
             if (CurrentHearts <= 0)
             {
@@ -155,6 +155,7 @@ namespace HellTiles.Player
 
         private void LoadGameOverScene()
         {
+            // Fail gracefully if the scene is missing.
             if (string.IsNullOrWhiteSpace(gameOverSceneName))
             {
                 Debug.LogWarning($"{nameof(PlayerHealth)} has no Game Over scene name configured.", this);
