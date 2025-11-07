@@ -8,7 +8,7 @@ namespace HellTiles.Powerups
     [RequireComponent(typeof(Collider2D))]
     public class HeartPickup : MonoBehaviour
     {
-        [SerializeField] private float lifetime = 4f;
+        [SerializeField] private float lifetime = 4f; // total time before despawn
         [SerializeField] private float flickerDuration = 1.5f;
         [SerializeField] private SpriteRenderer? spriteRenderer;
 
@@ -84,7 +84,7 @@ namespace HellTiles.Powerups
                 spawner.HandleHeartCollected(cell, this);
             }
 
-            Destroy(gameObject);
+            Destroy(gameObject); // cleanup the pickup instance
         }
 
         private void SetRendererVisible(bool visible)

@@ -8,7 +8,7 @@ namespace HellTiles.UI
 {
     public class GameOverSceneController : MonoBehaviour
     {
-        [SerializeField] private string newGameSceneName = "New Game";
+        [SerializeField] private string newGameSceneName = "New Game"; // menu scene name
         [SerializeField] private KeyCode restartKey = KeyCode.Space;
         [SerializeField] private TMP_Text? lastRunText;
         [SerializeField] private TMP_Text? bestRunText;
@@ -20,7 +20,7 @@ namespace HellTiles.UI
 
         private void Update()
         {
-            if (Input.GetKeyDown(restartKey))
+            if (Input.GetKeyDown(restartKey)) // tap space to restart
             {
                 if (!Application.CanStreamedLevelBeLoaded(newGameSceneName))
                 {
@@ -34,6 +34,7 @@ namespace HellTiles.UI
 
         private void UpdateLabels()
         {
+            // Show results pulled from the last gameplay run.
             if (lastRunText != null)
             {
                 lastRunText.text = $"Time Survived: {FormatTime(GameSessionData.LastRunDuration)}";
