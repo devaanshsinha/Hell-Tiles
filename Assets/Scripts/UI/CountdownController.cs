@@ -21,7 +21,7 @@ namespace HellTiles.UI
 
         [Header("Gameplay Hooks")]
         [SerializeField] private SurvivalTimer? survivalTimer;
-        [SerializeField] private MonoBehaviour[] enableAfterCountdown = [];
+        [SerializeField] private MonoBehaviour[] enableAfterCountdown = new MonoBehaviour[0];
 
         private void Awake()
         {
