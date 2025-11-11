@@ -2,7 +2,7 @@
 
 ## Current Status
 
-The foundational **Hell Tiles** Unity project setup is complete and a playable prototype is live. `SampleScene` contains a placeholder tilemap arena, a controllable player that hops between tiles, projectile spawners that fire toward the player, a three-heart health system with blinking feedback, and scene transitions between `New Game`, gameplay, and `Game Over`. This file keeps AI assistants aligned with real project progress so future work builds on the latest implementation.
+The foundational **Hell Tiles** Unity project setup is complete and a playable prototype is live. We now have a four-scene loop (`New Game → Tutorial → SampleScene → Game Over → New Game`). `SampleScene` contains a placeholder tilemap arena, a controllable player that hops between tiles, projectile spawners (standard and optional homing), a three-heart health system with blinking feedback, heart pickups, and a HUD score counter that increments every second. This file keeps AI assistants aligned with real project progress so future work builds on the latest implementation.
 
 ---
 
@@ -25,27 +25,32 @@ Planned features (from Conner's design notes):
 
 - Unity project created locally (version **6.2 / 6000.2.9f1**) and source control configured (Git, GitHub remote, Git LFS, Unity Smart Merge).
 - Placeholder art added in `Assets/Art/` for background, player, and tile sprites.
+- `New Game` scene: minimal UI (TextMeshPro “Press Space” text) with `NewGameSceneController` that loads `Tutorial`.
+- `Tutorial` scene: instructions UI plus `TutorialSceneController` (press space to proceed into gameplay).
 - `SampleScene.unity` currently includes:
   - `Grid` + Tilemap with a 6×4 walkable layout.
   - Background sprite renderer positioned beneath the board.
   - `Player` GameObject (sprite + `Rigidbody2D`) with grid-based movement (`PlayerGridMover`) and health (`PlayerHealth`, three-heart UI, invulnerability bounce).
-  - Projectile system that spawns `BasicProjectile` prefabs at the screen perimeter and moves them toward the player.
-  - `HeartSpawner` manager that periodically instantiates `HeartPickup` prefabs on random walkable tiles; pickups heal the player if they have fewer than three hearts.
+  - Projectile system (`ProjectileSpawner`) that spawns standard `BasicProjectile` prefabs from screen perimeter/circle plus optional homing projectiles every ~15s (uses `continuousTracking` prefab variant).
+  - `HeartSpawner` manager that periodically instantiates `HeartPickup` prefabs on random walkable tiles; pickups can be collected even at max health (wastes the pickup) and self-despawn after 4s with a flicker warning.
+- `Game Over` scene: displays last and best survival times via `GameOverSceneController`, waits for spacebar to return to `New Game`.
 - UI elements:
-  - Canvas with TextMeshPro timer in the top-right driven by `SurvivalTimer`.
+  - Canvas with TextMeshPro score counter (points per second) driven by `SurvivalTimer`.
   - Hearts UI panel linked to `PlayerHealth`.
+  - Fullscreen countdown panel (`CountdownController`) that locks gameplay until the 3-2-1-Go animation completes.
 - Scene flow:
-  - `New Game` scene listens for the spacebar to start gameplay (`NewGameSceneController`).
-  - `SampleScene` loads `Game Over` when hearts reach zero (`PlayerHealth`).
-  - `Game Over` scene listens for spacebar to return to `New Game` (`GameOverSceneController`).
+  - `New Game` scene listens for space to jump into the tutorial (`NewGameSceneController`).
+  - `Tutorial` scene listens for space to enter the main gameplay (`TutorialSceneController`).
+  - `SampleScene` runs the core loop and loads `Game Over` on death (`PlayerHealth`).
+  - `Game Over` scene displays last/best scores and listens for space to return to `New Game` (`GameOverSceneController`).
 - Scripts (C#):
-  - `Assets/Scripts/Tiles/TileGridController.cs` – grid queries and walkable checks.
-  - `Assets/Scripts/Player/PlayerGridMover.cs` – input-driven tile hopping.
-  - `Assets/Scripts/Player/PlayerHealth.cs` – heart tracking, hit blink, scene transition.
-  - `Assets/Scripts/Projectiles/BasicProjectile.cs` – straight-line projectiles that damage the player and self-destruct.
-  - `Assets/Scripts/Projectiles/ProjectileSpawner.cs` – spawns projectiles from perimeter or circular ring.
-  - `Assets/Scripts/Powerups/HeartPickup.cs`, `HeartSpawner.cs` – heart collectible behaviour and periodic spawning.
-  - `Assets/Scripts/UI/NewGameSceneController.cs`, `GameOverSceneController.cs`, `GameSessionData.cs`, `SurvivalTimer.cs` – scene flow, session timing, and UI display.
+  - `Assets/Scripts/Tiles/TileGridController.cs` – grid queries, walkable checks, tile bounce transform animation.
+  - `Assets/Scripts/Player/PlayerGridMover.cs` – input-driven tile hopping with landing bounce.
+  - `Assets/Scripts/Player/PlayerHealth.cs` – heart tracking, hit blink, scene transition to `Game Over`.
+  - `Assets/Scripts/Projectiles/BasicProjectile.cs` – straight-line or homing projectiles.
+  - `Assets/Scripts/Projectiles/ProjectileSpawner.cs` – regular projectile spawner plus optional secondary homing spawn loop.
+  - `Assets/Scripts/Powerups/HeartPickup.cs`, `HeartSpawner.cs` – timed heart pickups and spawn management.
+  - `Assets/Scripts/UI/NewGameSceneController.cs`, `TutorialSceneController.cs`, `GameOverSceneController.cs`, `CountdownController.cs`, `GameSessionData.cs`, `SurvivalTimer.cs` – scene flow, countdown, score tracking, and UI display.
 - Input: `Assets/InputSystem_Actions.inputactions` (default template) supplies the `Move` action bound to keyboard/gamepad.
 - Layer collisions configured so projectiles only hit the player.
 

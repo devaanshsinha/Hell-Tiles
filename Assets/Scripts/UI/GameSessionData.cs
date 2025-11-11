@@ -3,26 +3,26 @@ namespace HellTiles.UI
     public static class GameSessionData
     {
         // Simple in-memory scoreboard for the current play session.
-        public static float LastRunDuration { get; private set; }
-        public static float BestRunDuration { get; private set; }
+        public static int LastRunScore { get; private set; }
+        public static int BestRunScore { get; private set; }
 
-        public static void RegisterRun(float durationSeconds)
+        public static void RegisterScore(int score)
         {
-            if (durationSeconds < 0f)
+            if (score < 0)
             {
-                durationSeconds = 0f;
+                score = 0;
             }
 
-            LastRunDuration = durationSeconds; // store latest attempt
-            if (durationSeconds > BestRunDuration)
+            LastRunScore = score; // store latest attempt
+            if (score > BestRunScore)
             {
-                BestRunDuration = durationSeconds;
+                BestRunScore = score;
             }
         }
 
         public static void ResetCurrentRun()
         {
-            LastRunDuration = 0f;
+            LastRunScore = 0;
         }
     }
 }

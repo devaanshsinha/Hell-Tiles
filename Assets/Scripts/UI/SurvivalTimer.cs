@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using TMPro;
 
@@ -15,12 +14,14 @@ namespace HellTiles.UI
 
         [SerializeField] private TMP_Text? timerText; // world-space text on the HUD
         [SerializeField] private bool autoStart = true;
-        [SerializeField] private bool showMilliseconds = false;
+        [SerializeField] private float pointsPerSecond = 1f;
+        [SerializeField] private string scoreSuffix = " pts";
 
-        private float elapsedTime;
+        private float accumulatedPoints;
+        private int currentScore;
         private bool isRunning;
 
-        public float ElapsedTime => elapsedTime;
+        public int CurrentScore => currentScore;
         public bool IsRunning => isRunning;
 
         private void Awake()
@@ -32,7 +33,8 @@ namespace HellTiles.UI
             }
 
             Instance = this;
-            elapsedTime = 0f;
+            accumulatedPoints = 0f;
+            currentScore = 0;
             isRunning = autoStart;
             UpdateDisplay();
         }
@@ -52,13 +54,19 @@ namespace HellTiles.UI
                 return;
             }
 
-            elapsedTime += Time.deltaTime; // accumulate seconds
-            UpdateDisplay();
+            accumulatedPoints += pointsPerSecond * Time.deltaTime;
+            var newScore = Mathf.FloorToInt(accumulatedPoints);
+            if (newScore != currentScore)
+            {
+                currentScore = newScore;
+                UpdateDisplay();
+            }
         }
 
         public void ResetTimer()
         {
-            elapsedTime = 0f;
+            accumulatedPoints = 0f;
+            currentScore = 0;
             UpdateDisplay();
         }
 
@@ -75,7 +83,7 @@ namespace HellTiles.UI
             }
 
             isRunning = false;
-            GameSessionData.RegisterRun(elapsedTime);
+            GameSessionData.RegisterScore(currentScore);
         }
 
         private void UpdateDisplay()
@@ -85,9 +93,13 @@ namespace HellTiles.UI
                 return;
             }
 
-            var span = TimeSpan.FromSeconds(Mathf.Max(0f, elapsedTime)); // guard against negative times
-            var format = showMilliseconds ? @"mm\:ss\.ff" : @"mm\:ss";
-            timerText.text = span.ToString(format);
+            var display = currentScore.ToString();
+            if (!string.IsNullOrEmpty(scoreSuffix))
+            {
+                display += scoreSuffix;
+            }
+
+            timerText.text = display;
         }
     }
 }
