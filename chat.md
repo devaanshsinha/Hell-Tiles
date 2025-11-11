@@ -37,6 +37,7 @@ Planned features (from Conner's design notes):
 - UI elements:
   - Canvas with TextMeshPro score counter (points per second) driven by `SurvivalTimer`.
   - Hearts UI panel linked to `PlayerHealth`.
+  - Fullscreen countdown panel (`CountdownController`) that locks gameplay until the 3-2-1-Go animation completes.
 - Scene flow:
   - `New Game` scene listens for space to jump into the tutorial (`NewGameSceneController`).
   - `Tutorial` scene listens for space to enter the main gameplay (`TutorialSceneController`).
@@ -49,7 +50,7 @@ Planned features (from Conner's design notes):
   - `Assets/Scripts/Projectiles/BasicProjectile.cs` – straight-line or homing projectiles.
   - `Assets/Scripts/Projectiles/ProjectileSpawner.cs` – regular projectile spawner plus optional secondary homing spawn loop.
   - `Assets/Scripts/Powerups/HeartPickup.cs`, `HeartSpawner.cs` – timed heart pickups and spawn management.
-  - `Assets/Scripts/UI/NewGameSceneController.cs`, `TutorialSceneController.cs`, `GameOverSceneController.cs`, `GameSessionData.cs`, `SurvivalTimer.cs` – scene flow, score tracking, and UI display.
+  - `Assets/Scripts/UI/NewGameSceneController.cs`, `TutorialSceneController.cs`, `GameOverSceneController.cs`, `CountdownController.cs`, `GameSessionData.cs`, `SurvivalTimer.cs` – scene flow, countdown, score tracking, and UI display.
 - Input: `Assets/InputSystem_Actions.inputactions` (default template) supplies the `Move` action bound to keyboard/gamepad.
 - Layer collisions configured so projectiles only hit the player.
 
