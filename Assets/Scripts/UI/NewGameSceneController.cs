@@ -5,20 +5,20 @@ namespace HellTiles.UI
 {
     public class NewGameSceneController : MonoBehaviour
     {
-        [SerializeField] private string gameplaySceneName = "SampleScene"; // main gameplay scene
+        [SerializeField] private string tutorialSceneName = "Tutorial"; // first stop after menu
         [SerializeField] private KeyCode advanceKey = KeyCode.Space;
 
         private void Update()
         {
             if (Input.GetKeyDown(advanceKey)) // press space to start
             {
-                if (!Application.CanStreamedLevelBeLoaded(gameplaySceneName))
+                if (!Application.CanStreamedLevelBeLoaded(tutorialSceneName))
                 {
-                    Debug.LogWarning($"Scene '{gameplaySceneName}' is not added to Build Settings.");
+                    Debug.LogWarning($"Scene '{tutorialSceneName}' is not added to Build Settings.");
                     return;
                 }
 
-                SceneManager.LoadScene(gameplaySceneName);
+                SceneManager.LoadScene(tutorialSceneName);
             }
         }
     }

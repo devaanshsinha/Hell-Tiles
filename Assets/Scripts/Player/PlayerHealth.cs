@@ -23,6 +23,7 @@ namespace HellTiles.Player
         [SerializeField, Tooltip("Seconds spent invulnerable after taking damage.")] private float invulnerabilityDuration = 1.5f;
         [SerializeField, Tooltip("How many visible flashes to play while invulnerable.")] private int blinkCount = 3;
         [SerializeField, Tooltip("Scene to load when all hearts are lost.")] private string gameOverSceneName = "Game Over";
+        [SerializeField, Tooltip("Scene to return to after game over.")] private string newGameSceneName = "New Game";
 
         [Header("UI")]
         [SerializeField] private List<Image> heartIcons = new();

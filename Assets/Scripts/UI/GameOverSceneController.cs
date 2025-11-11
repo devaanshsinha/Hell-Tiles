@@ -8,7 +8,7 @@ namespace HellTiles.UI
 {
     public class GameOverSceneController : MonoBehaviour
     {
-        [SerializeField] private string newGameSceneName = "New Game"; // menu scene name
+        [SerializeField] private string menuSceneName = "New Game"; // menu scene name
         [SerializeField] private KeyCode restartKey = KeyCode.Space;
         [SerializeField] private TMP_Text? lastRunText;
         [SerializeField] private TMP_Text? bestRunText;
@@ -22,13 +22,13 @@ namespace HellTiles.UI
         {
             if (Input.GetKeyDown(restartKey)) // tap space to restart
             {
-                if (!Application.CanStreamedLevelBeLoaded(newGameSceneName))
+                if (!Application.CanStreamedLevelBeLoaded(menuSceneName))
                 {
-                    Debug.LogWarning($"Scene '{newGameSceneName}' is not added to Build Settings.");
+                    Debug.LogWarning($"Scene '{menuSceneName}' is not added to Build Settings.");
                     return;
                 }
 
-                SceneManager.LoadScene(newGameSceneName);
+                SceneManager.LoadScene(menuSceneName);
             }
         }
 
@@ -37,19 +37,13 @@ namespace HellTiles.UI
             // Show results pulled from the last gameplay run.
             if (lastRunText != null)
             {
-                lastRunText.text = $"Time Survived: {FormatTime(GameSessionData.LastRunDuration)}";
+                lastRunText.text = $"Score: {GameSessionData.LastRunScore}";
             }
 
             if (bestRunText != null)
             {
-                bestRunText.text = $"Best Time: {FormatTime(GameSessionData.BestRunDuration)}";
+                bestRunText.text = $"Best Score: {GameSessionData.BestRunScore}";
             }
-        }
-
-        private static string FormatTime(float seconds)
-        {
-            var span = System.TimeSpan.FromSeconds(Mathf.Max(0f, seconds));
-            return span.ToString(@"mm\:ss");
         }
     }
 }
