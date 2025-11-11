@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 1fedfa90c124d4e2bbcb0edcb49e6992
+guid: d5aa7ea85adee4b0397bc836b13e6ad2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1947849855472530730
-    second: bg1080_0
+      213: 3124480137607367176
+    second: bars-13.png_0
+  - first:
+      213: -173790164558358739
+    second: bars-13.png_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bg1080_0
+      name: bars-13.png_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1920
-        height: 1080
+        width: 44
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6da83c860e8d7f4e0800000000000000
-      internalID: -1947849855472530730
+      spriteID: 80ac9d581226c5b20800000000000000
+      internalID: 3124480137607367176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bars-13.png_1
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 0
+        width: 44
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d27da0024c2969df0800000000000000
+      internalID: -173790164558358739
       vertices: []
       indices: 
       edges: []
@@ -125,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bg1080_0: -1947849855472530730
+      bars-13.png_0: 3124480137607367176
+      bars-13.png_1: -173790164558358739
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
