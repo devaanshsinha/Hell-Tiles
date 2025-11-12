@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: d5aa7ea85adee4b0397bc836b13e6ad2
+guid: 57b65390cf98c41e1a1a925adbdacf05
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3124480137607367176
-    second: bars-13.png_0
-  - first:
-      213: -173790164558358739
-    second: bars-13.png_1
+      213: 5777576826077588335
+    second: TutorialScreenUpscaled_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bars-13.png_0
+      name: TutorialScreenUpscaled_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 44
-        height: 192
+        width: 2048
+        height: 1536
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,30 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 80ac9d581226c5b20800000000000000
-      internalID: 3124480137607367176
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bars-13.png_1
-      rect:
-        serializedVersion: 2
-        x: 298
-        y: 0
-        width: 44
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d27da0024c2969df0800000000000000
-      internalID: -173790164558358739
+      spriteID: f6b22ec23831e2050800000000000000
+      internalID: 5777576826077588335
       vertices: []
       indices: 
       edges: []
@@ -173,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bars-13.png_0: 3124480137607367176
-      bars-13.png_1: -173790164558358739
+      TutorialScreenUpscaled_0: 5777576826077588335
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
