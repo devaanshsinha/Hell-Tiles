@@ -37,6 +37,7 @@ Planned features (from Conner's design notes):
 - UI elements:
   - Canvas with TextMeshPro score counter (points per second) driven by `SurvivalTimer`.
   - Hearts UI panel linked to `PlayerHealth`.
+  - Coin counter (`CoinCounter`) pulling totals from `CoinWallet`.
   - Fullscreen countdown panel (`CountdownController`) that locks gameplay until the 3-2-1-Go animation completes.
 - Scene flow:
   - `New Game` scene listens for space to jump into the tutorial (`NewGameSceneController`).
@@ -47,10 +48,11 @@ Planned features (from Conner's design notes):
   - `Assets/Scripts/Tiles/TileGridController.cs` – grid queries, walkable checks, tile bounce transform animation.
   - `Assets/Scripts/Player/PlayerGridMover.cs` – input-driven tile hopping with landing bounce.
   - `Assets/Scripts/Player/PlayerHealth.cs` – heart tracking, hit blink, scene transition to `Game Over`.
-  - `Assets/Scripts/Projectiles/BasicProjectile.cs` – straight-line or homing projectiles.
-  - `Assets/Scripts/Projectiles/ProjectileSpawner.cs` – regular projectile spawner plus optional secondary homing spawn loop.
-  - `Assets/Scripts/Powerups/HeartPickup.cs`, `HeartSpawner.cs` – timed heart pickups and spawn management.
-  - `Assets/Scripts/UI/NewGameSceneController.cs`, `TutorialSceneController.cs`, `GameOverSceneController.cs`, `CountdownController.cs`, `GameSessionData.cs`, `SurvivalTimer.cs` – scene flow, countdown, score tracking, and UI display.
+  - `Assets/Scripts/Projectiles/BasicProjectile.cs` – straight-line or homing projectiles (auto-register with director).
+  - `Assets/Scripts/Projectiles/ProjectileSpawner.cs`, `HomingProjectileTrack.cs`, `ArrowProjectileTrack.cs` – individual projectile tracks (straight, homing, random arrows).
+  - `Assets/Scripts/Projectiles/ProjectileDirector.cs`, `ProjectileRegistry.cs`, `IProjectileTrack.cs` – central coordinator that schedules all projectile tracks and enforces a max bullet count.
+  - `Assets/Scripts/Powerups/HeartPickup.cs`, `HeartSpawner.cs`, `CoinPickup.cs`, `CoinSpawner.cs` – timed pickups and spawn management for hearts/coins.
+  - `Assets/Scripts/UI/NewGameSceneController.cs`, `TutorialSceneController.cs`, `GameOverSceneController.cs`, `CountdownController.cs`, `CoinCounter.cs`, `CoinWallet.cs`, `GameSessionData.cs`, `SurvivalTimer.cs` – scene flow, countdown, persistent coins/score HUD.
 - Input: `Assets/InputSystem_Actions.inputactions` (default template) supplies the `Move` action bound to keyboard/gamepad.
 - Layer collisions configured so projectiles only hit the player.
 

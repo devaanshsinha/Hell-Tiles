@@ -5,36 +5,28 @@ using UnityEngine;
 namespace HellTiles.Projectiles
 {
     /// <summary>
-    /// Spawns straight projectiles around the arena when triggered by the director.
+    /// Spawns homing projectiles from around the arena.
     /// </summary>
-    public class ProjectileSpawner : MonoBehaviour, IProjectileTrack
+    public class HomingProjectileTrack : MonoBehaviour, IProjectileTrack
     {
         [SerializeField] private BasicProjectile projectilePrefab = default!;
         [SerializeField] private Transform playerTransform = default!;
-        [SerializeField] private Vector2 spawnAreaSize = new(12f, 8f); // width/height around the spawner
-        [SerializeField] private bool useCircleSpawn;
-        [SerializeField] private float spawnRadius = 8f;
+        [SerializeField] private Vector2 spawnAreaSize = new(12f, 8f);
+        [SerializeField] private bool useCircleSpawn = true;
+        [SerializeField] private float circleRadius = 10f;
         [SerializeField] private bool spawnFromPerimeter = true;
-        [SerializeField] private bool trackPlayerContinuously;
 
         public void SpawnProjectile()
         {
             if (projectilePrefab == null || playerTransform == null)
             {
-                Debug.LogWarning($"{nameof(ProjectileSpawner)} missing references.", this);
+                Debug.LogWarning($"{nameof(HomingProjectileTrack)} missing references.", this);
                 return;
             }
 
             var spawnPoint = SelectSpawnPoint();
             var projectile = Instantiate(projectilePrefab, spawnPoint, Quaternion.identity);
-            if (trackPlayerContinuously)
-            {
-                projectile.Initialise(playerTransform);
-            }
-            else
-            {
-                projectile.Initialise(playerTransform.position);
-            }
+            projectile.Initialise(playerTransform);
         }
 
         private Vector3 SelectSpawnPoint()
@@ -42,32 +34,30 @@ namespace HellTiles.Projectiles
             if (useCircleSpawn)
             {
                 var angle = Random.Range(0f, Mathf.PI * 2f);
-                var radius = spawnRadius;
-                var offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
+                var offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * circleRadius;
                 return playerTransform.position + (Vector3)offset;
             }
 
             var half = spawnAreaSize * 0.5f;
-
             if (spawnFromPerimeter)
             {
                 var side = Random.Range(0, 4);
                 float x = 0f, y = 0f;
                 switch (side)
                 {
-                    case 0: // top
+                    case 0:
                         x = Random.Range(-half.x, half.x);
                         y = half.y;
                         break;
-                    case 1: // bottom
+                    case 1:
                         x = Random.Range(-half.x, half.x);
                         y = -half.y;
                         break;
-                    case 2: // left
+                    case 2:
                         x = -half.x;
                         y = Random.Range(-half.y, half.y);
                         break;
-                    default: // right
+                    default:
                         x = half.x;
                         y = Random.Range(-half.y, half.y);
                         break;

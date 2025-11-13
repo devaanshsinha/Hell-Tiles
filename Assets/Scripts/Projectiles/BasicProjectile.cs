@@ -35,6 +35,12 @@ namespace HellTiles.Projectiles
         {
             spawnPosition = transform.position;
             elapsedLifetime = 0f;
+            ProjectileRegistry.Register(this);
+        }
+
+        private void OnDisable()
+        {
+            ProjectileRegistry.Unregister(this);
         }
 
         private void FixedUpdate()

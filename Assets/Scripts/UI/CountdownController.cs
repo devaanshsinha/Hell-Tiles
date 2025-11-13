@@ -2,6 +2,8 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
+#nullable enable
+
 namespace HellTiles.UI
 {
     /// <summary>
