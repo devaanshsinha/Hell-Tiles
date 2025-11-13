@@ -26,7 +26,7 @@ namespace HellTiles.Projectiles
 
             var spawnPoint = SelectSpawnPoint();
             var projectile = Instantiate(projectilePrefab, spawnPoint, Quaternion.identity);
-            projectile.Initialise(playerTransform);
+            projectile.Initialise(playerTransform); // keep chasing the player
         }
 
         private Vector3 SelectSpawnPoint()

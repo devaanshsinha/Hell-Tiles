@@ -58,7 +58,7 @@ namespace HellTiles.Projectiles
             var projectile = Instantiate(arrowPrefab, startPos, Quaternion.identity);
             if (direction == Vector3.zero)
             {
-                direction = Vector3.right;
+                direction = Vector3.right; // fallback direction
             }
 
             projectile.Initialise(startPos + direction);

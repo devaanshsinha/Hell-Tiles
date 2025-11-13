@@ -22,13 +22,13 @@ namespace HellTiles.Projectiles
         }
 
         [SerializeField] private int maxActiveProjectiles = 50;
-        [SerializeField] private TrackConfig[] tracks = new TrackConfig[0];
+        [SerializeField] private TrackConfig[] tracks = new TrackConfig[0]; // configure in Inspector
 
         private readonly Dictionary<TrackConfig, Coroutine> activeCoroutines = new();
 
         private void OnEnable()
         {
-            ProjectileRegistry.MaxActiveProjectiles = maxActiveProjectiles;
+            ProjectileRegistry.MaxActiveProjectiles = maxActiveProjectiles; // share cap globally
             foreach (var config in tracks)
             {
                 if (config.trackBehaviour is IProjectileTrack track && config.enabled)

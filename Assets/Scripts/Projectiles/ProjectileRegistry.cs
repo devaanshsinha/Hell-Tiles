@@ -14,12 +14,12 @@ namespace HellTiles.Projectiles
 
         public static void Register(BasicProjectile projectile)
         {
-            ActiveCount++;
+            ActiveCount++; // track spawn
         }
 
         public static void Unregister(BasicProjectile projectile)
         {
-            ActiveCount = Mathf.Max(0, ActiveCount - 1);
+            ActiveCount = Mathf.Max(0, ActiveCount - 1); // clamp in case of double destroys
         }
     }
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace HellTiles.UI
 {
+    /// <summary>
+    /// Simple persistent storage for total coins earned across runs.
+    /// </summary>
     public static class CoinWallet
     {
         private const string CoinsKey = "hellTiles_totalCoins";
@@ -23,7 +26,7 @@ namespace HellTiles.UI
                 return;
             }
 
-            TotalCoins += amount;
+            TotalCoins += amount; // update running total
             PlayerPrefs.SetInt(CoinsKey, TotalCoins);
             PlayerPrefs.Save();
             CoinsChanged?.Invoke(TotalCoins);
@@ -31,7 +34,7 @@ namespace HellTiles.UI
 
         public static void ResetCoins()
         {
-            TotalCoins = 0;
+            TotalCoins = 0; // only use for debugging or wipes
             PlayerPrefs.SetInt(CoinsKey, TotalCoins);
             PlayerPrefs.Save();
             CoinsChanged?.Invoke(TotalCoins);

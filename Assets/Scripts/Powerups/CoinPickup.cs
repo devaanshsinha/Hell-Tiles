@@ -5,6 +5,9 @@ using HellTiles.UI;
 
 namespace HellTiles.Powerups
 {
+    /// <summary>
+    /// Simple rotating coin collectible with lifetime + flicker warning.
+    /// </summary>
     [RequireComponent(typeof(Collider2D))]
     public class CoinPickup : MonoBehaviour
     {
@@ -36,6 +39,7 @@ namespace HellTiles.Powerups
 
             if (elapsed >= flickerStart && spriteRenderer != null)
             {
+                // Gently flash before the coin disappears.
                 var t = Mathf.PingPong((elapsed - flickerStart) * 10f, 1f);
                 var color = spriteRenderer.color;
                 color.a = Mathf.Lerp(1f, 0.2f, t);
@@ -51,7 +55,7 @@ namespace HellTiles.Powerups
                 return;
             }
 
-            CoinWallet.AddCoins(coinValue);
+            CoinWallet.AddCoins(coinValue); // persistently add to wallet
             Destroy(gameObject);
         }
     }

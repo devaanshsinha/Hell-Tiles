@@ -6,6 +6,9 @@ namespace HellTiles.UI
     /// <summary>
     /// Displays the player's total coin count.
     /// </summary>
+    /// <summary>
+    /// Updates a TMP label whenever the wallet total changes.
+    /// </summary>
     public class CoinCounter : MonoBehaviour
     {
         [SerializeField] private TMP_Text counterText = default!;
@@ -34,7 +37,7 @@ namespace HellTiles.UI
                 return;
             }
 
-            counterText.text = CoinWallet.TotalCoins.ToString() + suffix;
+            counterText.text = CoinWallet.TotalCoins.ToString() + suffix; // e.g., "12 coins"
         }
     }
 }

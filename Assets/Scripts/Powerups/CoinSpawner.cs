@@ -6,6 +6,9 @@ using HellTiles.Tiles;
 
 namespace HellTiles.Powerups
 {
+    /// <summary>
+    /// Drops coins on random walkable tiles at a gentle pace.
+    /// </summary>
     public class CoinSpawner : MonoBehaviour
     {
         [SerializeField] private TileGridController gridController = default!;
@@ -66,7 +69,7 @@ namespace HellTiles.Powerups
                 }
             }
 
-            var attempts = walkableCells.Count;
+            var attempts = walkableCells.Count; // avoid infinite loops if cells are occupied
             while (attempts-- > 0)
             {
                 var cell = walkableCells[Random.Range(0, walkableCells.Count)];
@@ -85,6 +88,7 @@ namespace HellTiles.Powerups
 
         private System.Collections.IEnumerator RemoveOnDestroy(Vector3Int cell, CoinPickup pickup)
         {
+            // Wait until the pickup is destroyed then free the slot.
             yield return new WaitUntil(() => pickup == null);
             activeCoins.Remove(cell);
         }
