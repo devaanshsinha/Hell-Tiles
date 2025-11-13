@@ -31,14 +31,24 @@ Planned features (from Conner's design notes):
   - `Grid` + Tilemap with a 6×4 walkable layout.
   - Background sprite renderer positioned beneath the board.
   - `Player` GameObject (sprite + `Rigidbody2D`) with grid-based movement (`PlayerGridMover`) and health (`PlayerHealth`, three-heart UI, invulnerability bounce).
-  - Projectile system (`ProjectileSpawner`) that spawns standard `BasicProjectile` prefabs from screen perimeter/circle plus optional homing projectiles every ~15s (uses `continuousTracking` prefab variant).
+  - Projectile director setup:
+    - `ProjectileDirector` orchestrates all projectile tracks and enforces a global cap (50 active shots by default).
+    - `ProjectileSpawner` track handles the original straight fireballs aimed at the player.
+    - `HomingProjectileTrack` spawns the “continuous tracking” variant every ~15 seconds.
+    - `ArrowProjectileTrack` launches random arrows between walkable tiles to keep the board busy.
   - `HeartSpawner` manager that periodically instantiates `HeartPickup` prefabs on random walkable tiles; pickups can be collected even at max health (wastes the pickup) and self-despawn after 4s with a flicker warning.
+  - `CoinSpawner` for animated coin pickups; coins auto-flicker before despawning and increment a persistent coin wallet.
+  - HUD overlay with:
+    - Score counter (`SurvivalTimer`) that accrues points per second (stored in `GameSessionData`, PlayerPrefs-backed).
+    - Heart icons bound to `PlayerHealth`.
+    - Coin counter bound to `CoinWallet` (PlayerPrefs-backed).
+    - `CountdownController` overlay that fades out after a 3-2-1-GO countdown, then enables gameplay scripts (player movement, projectile director, pickups, etc.).
 - `Game Over` scene: displays last and best survival times via `GameOverSceneController`, waits for spacebar to return to `New Game`.
-- UI elements:
+- UI elements (SampleScene):
   - Canvas with TextMeshPro score counter (points per second) driven by `SurvivalTimer`.
   - Hearts UI panel linked to `PlayerHealth`.
-  - Coin counter (`CoinCounter`) pulling totals from `CoinWallet`.
-  - Fullscreen countdown panel (`CountdownController`) that locks gameplay until the 3-2-1-Go animation completes.
+  - Coin counter (`CoinCounter`) showing the persistent value from `CoinWallet`.
+  - Fullscreen countdown panel (`CountdownController`) that locks gameplay until the 3-2-1-Go animation completes and then re-enables the projectile director, player mover, and pickup spawners.
 - Scene flow:
   - `New Game` scene listens for space to jump into the tutorial (`NewGameSceneController`).
   - `Tutorial` scene listens for space to enter the main gameplay (`TutorialSceneController`).
@@ -52,7 +62,7 @@ Planned features (from Conner's design notes):
   - `Assets/Scripts/Projectiles/ProjectileSpawner.cs`, `HomingProjectileTrack.cs`, `ArrowProjectileTrack.cs` – individual projectile tracks (straight, homing, random arrows).
   - `Assets/Scripts/Projectiles/ProjectileDirector.cs`, `ProjectileRegistry.cs`, `IProjectileTrack.cs` – central coordinator that schedules all projectile tracks and enforces a max bullet count.
   - `Assets/Scripts/Powerups/HeartPickup.cs`, `HeartSpawner.cs`, `CoinPickup.cs`, `CoinSpawner.cs` – timed pickups and spawn management for hearts/coins.
-  - `Assets/Scripts/UI/NewGameSceneController.cs`, `TutorialSceneController.cs`, `GameOverSceneController.cs`, `CountdownController.cs`, `CoinCounter.cs`, `CoinWallet.cs`, `GameSessionData.cs`, `SurvivalTimer.cs` – scene flow, countdown, persistent coins/score HUD.
+  - `Assets/Scripts/UI/NewGameSceneController.cs`, `TutorialSceneController.cs`, `GameOverSceneController.cs`, `CountdownController.cs`, `CoinCounter.cs`, `CoinWallet.cs`, `GameSessionData.cs`, `SurvivalTimer.cs` – scene flow, countdown, persistent coins/score HUD (score and coin totals are stored via PlayerPrefs).
 - Input: `Assets/InputSystem_Actions.inputactions` (default template) supplies the `Move` action bound to keyboard/gamepad.
 - Layer collisions configured so projectiles only hit the player.
 
