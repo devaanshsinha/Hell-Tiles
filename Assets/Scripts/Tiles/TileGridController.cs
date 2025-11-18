@@ -22,6 +22,8 @@ namespace HellTiles.Tiles
         private readonly HashSet<TileBase> blockedTileSet = new();
         private readonly Dictionary<Vector3Int, Coroutine> activeTileTweens = new();
 
+        public Tilemap WalkableTilemap => walkableTilemap;
+
         private void Awake()
         {
             CacheTileSets();

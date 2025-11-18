@@ -36,6 +36,7 @@ Planned features (from Conner's design notes):
     - `ProjectileSpawner` track handles the original straight fireballs aimed at the player.
     - `HomingProjectileTrack` spawns the “continuous tracking” variant every ~15 seconds.
     - `ArrowProjectileTrack` launches random arrows between walkable tiles to keep the board busy.
+    - `RowSweepTrack` spawns a row-clearing hazard (animated spray across an entire tile row).
   - `HeartSpawner` manager that periodically instantiates `HeartPickup` prefabs on random walkable tiles; pickups can be collected even at max health (wastes the pickup) and self-despawn after 4s with a flicker warning.
   - `CoinSpawner` for animated coin pickups; coins auto-flicker before despawning and increment a persistent coin wallet.
   - HUD overlay with:
@@ -59,7 +60,7 @@ Planned features (from Conner's design notes):
   - `Assets/Scripts/Player/PlayerGridMover.cs` – input-driven tile hopping with landing bounce.
   - `Assets/Scripts/Player/PlayerHealth.cs` – heart tracking, hit blink, scene transition to `Game Over`.
   - `Assets/Scripts/Projectiles/BasicProjectile.cs` – straight-line or homing projectiles (auto-register with director).
-  - `Assets/Scripts/Projectiles/ProjectileSpawner.cs`, `HomingProjectileTrack.cs`, `ArrowProjectileTrack.cs` – individual projectile tracks (straight, homing, random arrows).
+  - `Assets/Scripts/Projectiles/ProjectileSpawner.cs`, `HomingProjectileTrack.cs`, `ArrowProjectileTrack.cs`, `RowSweepTrack.cs` – individual projectile tracks (straight, homing, random arrows, row sweep).
   - `Assets/Scripts/Projectiles/ProjectileDirector.cs`, `ProjectileRegistry.cs`, `IProjectileTrack.cs` – central coordinator that schedules all projectile tracks and enforces a max bullet count.
   - `Assets/Scripts/Powerups/HeartPickup.cs`, `HeartSpawner.cs`, `CoinPickup.cs`, `CoinSpawner.cs` – timed pickups and spawn management for hearts/coins.
   - `Assets/Scripts/UI/NewGameSceneController.cs`, `TutorialSceneController.cs`, `GameOverSceneController.cs`, `CountdownController.cs`, `CoinCounter.cs`, `CoinWallet.cs`, `GameSessionData.cs`, `SurvivalTimer.cs` – scene flow, countdown, persistent coins/score HUD (score and coin totals are stored via PlayerPrefs).
