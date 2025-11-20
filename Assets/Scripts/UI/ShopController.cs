@@ -26,6 +26,8 @@ namespace HellTiles.UI
         [SerializeField] private KeyCode moveRightKey = KeyCode.D;
         [SerializeField] private KeyCode purchaseKey = KeyCode.Return;
         [SerializeField] private TMP_Text? infoLabel;
+        [SerializeField] private string menuSceneName = "New Game";
+        [SerializeField] private KeyCode exitKey = KeyCode.Escape;
 
         private int currentIndex;
 
@@ -66,6 +68,25 @@ namespace HellTiles.UI
             else if (Input.GetKeyDown(purchaseKey))
             {
                 AttemptPurchase(items[currentIndex]);
+            }
+            else if (Input.GetKeyDown(exitKey))
+            {
+                if (!UnityEngine.SceneManagement.SceneManager.GetSceneByName(menuSceneName).IsValid())
+                {
+                    if (!UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene()))
+                    {
+                        // fall through
+                    }
+                }
+
+                if (Application.CanStreamedLevelBeLoaded(menuSceneName))
+                {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(menuSceneName);
+                }
+                else
+                {
+                    DisplayMessage($"Scene '{menuSceneName}' missing");
+                }
             }
         }
 
