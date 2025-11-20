@@ -39,5 +39,24 @@ namespace HellTiles.UI
             PlayerPrefs.Save();
             CoinsChanged?.Invoke(TotalCoins);
         }
+
+        public static bool TrySpend(int amount)
+        {
+            if (amount <= 0)
+            {
+                return true;
+            }
+
+            if (TotalCoins < amount)
+            {
+                return false;
+            }
+
+            TotalCoins -= amount;
+            PlayerPrefs.SetInt(CoinsKey, TotalCoins);
+            PlayerPrefs.Save();
+            CoinsChanged?.Invoke(TotalCoins);
+            return true;
+        }
     }
 }

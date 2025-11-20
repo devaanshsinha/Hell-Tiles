@@ -1,0 +1,1614 @@
+fileFormatVersion: 2
+guid: 18314b6a7c6894070aa2efae188205d8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8436330824384470474
+    second: BeamProjectileFinished_0
+  - first:
+      213: -6523430697507527713
+    second: BeamProjectileFinished_1
+  - first:
+      213: -2591196337394280553
+    second: BeamProjectileFinished_2
+  - first:
+      213: 859372123071033272
+    second: BeamProjectileFinished_3
+  - first:
+      213: 1221633808625088233
+    second: BeamProjectileFinished_4
+  - first:
+      213: -4945415588732099181
+    second: BeamProjectileFinished_5
+  - first:
+      213: 5168769737889521352
+    second: BeamProjectileFinished_6
+  - first:
+      213: -729334083239150016
+    second: BeamProjectileFinished_7
+  - first:
+      213: 3419339934662721065
+    second: BeamProjectileFinished_8
+  - first:
+      213: -5168914189248130744
+    second: BeamProjectileFinished_9
+  - first:
+      213: 1507414791419795860
+    second: BeamProjectileFinished_10
+  - first:
+      213: 8062218589026292805
+    second: BeamProjectileFinished_11
+  - first:
+      213: 6911613709679525551
+    second: BeamProjectileFinished_12
+  - first:
+      213: -363448941529216464
+    second: BeamProjectileFinished_13
+  - first:
+      213: 3361688019162355847
+    second: BeamProjectileFinished_14
+  - first:
+      213: 654001223311476911
+    second: BeamProjectileFinished_15
+  - first:
+      213: -4219545607684260410
+    second: BeamProjectileFinished_16
+  - first:
+      213: 600291381681391630
+    second: BeamProjectileFinished_17
+  - first:
+      213: 2651638568424296906
+    second: BeamProjectileFinished_18
+  - first:
+      213: -2765411424812897088
+    second: BeamProjectileFinished_19
+  - first:
+      213: -5474077808764215677
+    second: BeamProjectileFinished_20
+  - first:
+      213: -5828403264653325289
+    second: BeamProjectileFinished_21
+  - first:
+      213: 6735730414071270734
+    second: BeamProjectileFinished_22
+  - first:
+      213: -6362197365607361340
+    second: BeamProjectileFinished_23
+  - first:
+      213: -4618677799291414394
+    second: BeamProjectileFinished_24
+  - first:
+      213: -2157993262048153274
+    second: BeamProjectileFinished_25
+  - first:
+      213: -4422825308564618137
+    second: BeamProjectileFinished_26
+  - first:
+      213: -2072178301270108660
+    second: BeamProjectileFinished_27
+  - first:
+      213: 9024522042114420761
+    second: BeamProjectileFinished_28
+  - first:
+      213: -4329189681665183304
+    second: BeamProjectileFinished_29
+  - first:
+      213: 2678412078359386039
+    second: BeamProjectileFinished_30
+  - first:
+      213: -6409160491088753429
+    second: BeamProjectileFinished_31
+  - first:
+      213: 7231666170115244108
+    second: BeamProjectileFinished_32
+  - first:
+      213: -2396332088371999212
+    second: BeamProjectileFinished_33
+  - first:
+      213: -3326055500530192413
+    second: BeamProjectileFinished_34
+  - first:
+      213: 7685318354211107235
+    second: BeamProjectileFinished_35
+  - first:
+      213: -5793516754804592718
+    second: BeamProjectileFinished_36
+  - first:
+      213: 5049323142332221316
+    second: BeamProjectileFinished_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BeamProjectileFinished_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1344
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -81}
+        - {x: 99, y: -81}
+        - {x: 99, y: -95}
+        - {x: 100, y: -96}
+        - {x: 128, y: -96}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 632a2e410d12cea80800000000000000
+      internalID: -8436330824384470474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1344
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -81}
+        - {x: 99, y: -81}
+        - {x: 99, y: -95}
+        - {x: 100, y: -96}
+        - {x: 128, y: -96}
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd36f2ed75e1875a0800000000000000
+      internalID: -6523430697507527713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1344
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -79}
+        - {x: 122, y: -76}
+        - {x: 104, y: -76}
+        - {x: 101, y: -80}
+        - {x: 101, y: -92}
+        - {x: 102, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 797125ee8a83a0cd0800000000000000
+      internalID: -2591196337394280553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1344
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -69}
+        - {x: 121, y: -66}
+        - {x: 104, y: -66}
+        - {x: 101, y: -72}
+        - {x: 101, y: -94}
+        - {x: 103, y: -95}
+        - {x: 128, y: -95}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bfa58d846a1deb00800000000000000
+      internalID: 859372123071033272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_4
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1344
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: 109, y: -49}
+        - {x: 101, y: -51}
+        - {x: 101, y: -77}
+        - {x: 106, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e6b4b8f97d14f010800000000000000
+      internalID: 1221633808625088233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1152
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: 109, y: -49}
+        - {x: 101, y: -51}
+        - {x: 101, y: -77}
+        - {x: 106, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 395a1f659ba5e5bb0800000000000000
+      internalID: -4945415588732099181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_6
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1152
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: 109, y: -49}
+        - {x: 101, y: -51}
+        - {x: 101, y: -77}
+        - {x: 106, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ce91b8f0b82bb740800000000000000
+      internalID: 5168769737889521352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_7
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1152
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: 109, y: -49}
+        - {x: 101, y: -51}
+        - {x: 101, y: -77}
+        - {x: 106, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04ef1f5f382e0e5f0800000000000000
+      internalID: -729334083239150016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_8
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1152
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -50}
+        - {x: 127, y: -49}
+        - {x: 103, y: -49}
+        - {x: 101, y: -54}
+        - {x: 101, y: -88}
+        - {x: 105, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92ef0ebdd8fe37f20800000000000000
+      internalID: 3419339934662721065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_9
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1152
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -86}
+        - {x: 128, y: -52}
+        - {x: 121, y: -49}
+        - {x: 104, y: -49}
+        - {x: 101, y: -55}
+        - {x: 101, y: -75}
+        - {x: 102, y: -94}
+        - {x: 126, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84193635ee35448b0800000000000000
+      internalID: -5168914189248130744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 960
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -86}
+        - {x: 128, y: -52}
+        - {x: 122, y: -49}
+        - {x: 102, y: -49}
+        - {x: 95, y: -56}
+        - {x: 95, y: -72}
+        - {x: 103, y: -94}
+        - {x: 126, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4991fb324c96be410800000000000000
+      internalID: 1507414791419795860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_11
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 960
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -49}
+        - {x: -17, y: -49}
+        - {x: -44, y: -58}
+        - {x: -44, y: -70}
+        - {x: -39, y: -75}
+        - {x: -28, y: -75}
+        - {x: 73, y: -78}
+        - {x: 105, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 544967c5711c2ef60800000000000000
+      internalID: 8062218589026292805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_12
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 960
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -49}
+        - {x: -101, y: -49}
+        - {x: -128, y: -56}
+        - {x: -128, y: -76}
+        - {x: 50, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: faefa26bc0cfaef50800000000000000
+      internalID: 6911613709679525551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_13
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 960
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: -87, y: -49}
+        - {x: -128, y: -55}
+        - {x: -128, y: -71}
+        - {x: -127, y: -73}
+        - {x: 36, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03ac8220d15c4faf0800000000000000
+      internalID: -363448941529216464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_14
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 960
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: -6, y: -49}
+        - {x: -128, y: -53}
+        - {x: -128, y: -76}
+        - {x: -127, y: -78}
+        - {x: 83, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 788dbd3417d17ae20800000000000000
+      internalID: 3361688019162355847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: -16, y: -49}
+        - {x: -128, y: -53}
+        - {x: -128, y: -76}
+        - {x: -18, y: -76}
+        - {x: 98, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa8c626c5aa731900800000000000000
+      internalID: 654001223311476911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_16
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 768
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -49}
+        - {x: -101, y: -49}
+        - {x: -128, y: -56}
+        - {x: -128, y: -76}
+        - {x: 50, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cd7b6c30a92175c0800000000000000
+      internalID: -4219545607684260410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_17
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: -87, y: -49}
+        - {x: -128, y: -55}
+        - {x: -128, y: -71}
+        - {x: -127, y: -73}
+        - {x: 36, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0809d6c4d9a45800800000000000000
+      internalID: 600291381681391630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_18
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: -6, y: -49}
+        - {x: -128, y: -53}
+        - {x: -128, y: -76}
+        - {x: -127, y: -78}
+        - {x: 83, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac1d7af9a338cc420800000000000000
+      internalID: 2651638568424296906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_19
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 768
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: -16, y: -49}
+        - {x: -128, y: -53}
+        - {x: -128, y: -76}
+        - {x: -18, y: -76}
+        - {x: 98, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cc683ef5f84f99d0800000000000000
+      internalID: -2765411424812897088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 576
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -49}
+        - {x: -101, y: -49}
+        - {x: -128, y: -56}
+        - {x: -128, y: -76}
+        - {x: 50, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38e92cf5c3b2804b0800000000000000
+      internalID: -5474077808764215677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_21
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 576
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: -87, y: -49}
+        - {x: -128, y: -55}
+        - {x: -128, y: -71}
+        - {x: -127, y: -73}
+        - {x: 36, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71c8c9a6c1a5d1fa0800000000000000
+      internalID: -5828403264653325289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_22
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 576
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: -6, y: -49}
+        - {x: -128, y: -53}
+        - {x: -128, y: -76}
+        - {x: -127, y: -78}
+        - {x: 83, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4d4389cf1f1a7d50800000000000000
+      internalID: 6735730414071270734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_23
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 576
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: -16, y: -49}
+        - {x: -128, y: -53}
+        - {x: -128, y: -76}
+        - {x: -18, y: -76}
+        - {x: 98, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c41c00543fe4b7a0800000000000000
+      internalID: -6362197365607361340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_24
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 576
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -50}
+        - {x: 126, y: -49}
+        - {x: -33, y: -49}
+        - {x: -128, y: -57}
+        - {x: -128, y: -71}
+        - {x: -126, y: -73}
+        - {x: 93, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6889049230927efb0800000000000000
+      internalID: -4618677799291414394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -49}
+        - {x: -71, y: -49}
+        - {x: -128, y: -52}
+        - {x: -128, y: -76}
+        - {x: 86, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 641feebcf844d02e0800000000000000
+      internalID: -2157993262048153274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_26
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -86}
+        - {x: 128, y: -49}
+        - {x: -88, y: -49}
+        - {x: -128, y: -52}
+        - {x: -128, y: -76}
+        - {x: -8, y: -77}
+        - {x: 101, y: -94}
+        - {x: 126, y: -94}
+      - - {x: 7.7894745, y: -66.1579}
+        - {x: 8, y: -66}
+        - {x: 8.25, y: -66.25}
+      - - {x: 12.666672, y: -67.66667}
+        - {x: 16, y: -66}
+        - {x: 19, y: -67}
+        - {x: 13, y: -68}
+      - - {x: -13, y: -69}
+        - {x: -16, y: -69}
+        - {x: -14.666672, y: -66.33333}
+        - {x: -13, y: -68}
+        - {x: -12, y: -70}
+      - - {x: -1, y: -67}
+        - {x: 0.5882416, y: -68.05882}
+        - {x: -2.5, y: -68.5}
+      - - {x: -6, y: -68}
+        - {x: -5, y: -68}
+        - {x: -3.6666718, y: -68.66667}
+        - {x: -6, y: -69}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7640663a0d7fe92c0800000000000000
+      internalID: -4422825308564618137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_27
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 384
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 89, y: -57}
+        - {x: 73, y: -57}
+        - {x: 73, y: -61}
+        - {x: 74.5, y: -62.25}
+        - {x: 70, y: -60}
+        - {x: 63, y: -60}
+        - {x: 63, y: -57}
+        - {x: 43, y: -57}
+        - {x: 42, y: -58}
+        - {x: 10, y: -58}
+        - {x: 10, y: -64}
+        - {x: 12, y: -66}
+        - {x: 22.205612, y: -65.63551}
+        - {x: 18, y: -69}
+        - {x: 20, y: -72}
+        - {x: 24, y: -72}
+        - {x: 27, y: -70}
+        - {x: 25.211273, y: -65.52817}
+        - {x: 34.81482, y: -65.18518}
+        - {x: 33, y: -67}
+        - {x: 34, y: -70}
+        - {x: 37, y: -70}
+        - {x: 39, y: -68}
+        - {x: 38.02353, y: -65.07059}
+        - {x: 40, y: -65}
+        - {x: 42, y: -63}
+        - {x: 42, y: -62}
+        - {x: 44, y: -65}
+        - {x: 40, y: -65}
+        - {x: 39, y: -68}
+        - {x: 41, y: -71}
+        - {x: 47, y: -70}
+        - {x: 47.199997, y: -69.8}
+        - {x: 48, y: -71}
+        - {x: 56, y: -71}
+        - {x: 60, y: -68.14285}
+        - {x: 60, y: -70}
+        - {x: 66.5, y: -70}
+        - {x: 66, y: -71}
+        - {x: 67, y: -74}
+        - {x: 76, y: -74}
+        - {x: 76, y: -70}
+        - {x: 79, y: -70}
+        - {x: 81, y: -69}
+        - {x: 81, y: -66.66667}
+        - {x: 82, y: -67}
+        - {x: 92, y: -67}
+        - {x: 93, y: -66}
+        - {x: 93, y: -72}
+        - {x: 105, y: -94}
+        - {x: 128, y: -94}
+        - {x: 128, y: -53}
+        - {x: 121, y: -49}
+        - {x: 110, y: -49}
+        - {x: 94, y: -60}
+        - {x: 93, y: -61}
+        - {x: 93, y: -59}
+      - - {x: -82, y: -66}
+        - {x: -80, y: -69}
+        - {x: -74, y: -69}
+        - {x: -72, y: -67}
+        - {x: -73, y: -64}
+        - {x: -77, y: -64}
+        - {x: -74, y: -62}
+        - {x: -74, y: -58}
+        - {x: -75, y: -55}
+        - {x: -82, y: -55}
+        - {x: -86, y: -58}
+        - {x: -86, y: -63}
+        - {x: -84, y: -64}
+        - {x: -81, y: -64}
+      - - {x: -60, y: -66}
+        - {x: -60, y: -63}
+        - {x: -57, y: -61}
+        - {x: -58, y: -57}
+        - {x: -61, y: -55}
+        - {x: -70, y: -55}
+        - {x: -72, y: -56}
+        - {x: -72, y: -59}
+        - {x: -71, y: -61}
+        - {x: -63.5, y: -62.5}
+        - {x: -65, y: -64}
+        - {x: -63, y: -67}
+      - - {x: -104.07692, y: -65.07692}
+        - {x: -105, y: -66}
+        - {x: -105, y: -63}
+      - - {x: -39, y: -60}
+        - {x: -40, y: -57}
+        - {x: -44, y: -57}
+        - {x: -46, y: -59}
+        - {x: -45, y: -62}
+        - {x: -41, y: -62}
+      - - {x: -13, y: -73}
+        - {x: -14, y: -70}
+        - {x: -16.142853, y: -69.14285}
+        - {x: -16, y: -69}
+        - {x: -16, y: -58}
+        - {x: -38, y: -58}
+        - {x: -39, y: -62}
+        - {x: -39, y: -72}
+        - {x: -38, y: -73}
+        - {x: -20, y: -73}
+        - {x: -19.71428, y: -72.71428}
+        - {x: -18, y: -75}
+        - {x: -15, y: -75}
+      - - {x: 9, y: -64}
+        - {x: 10, y: -61}
+        - {x: 9, y: -58}
+        - {x: 5, y: -58}
+        - {x: 0, y: -60}
+        - {x: 0, y: -63}
+        - {x: 2, y: -65}
+      - - {x: -46, y: -65}
+        - {x: -46, y: -64}
+        - {x: -50, y: -59}
+        - {x: -53, y: -59}
+        - {x: -56, y: -64}
+        - {x: -56, y: -67}
+        - {x: -55, y: -69}
+        - {x: -52, y: -69}
+      - - {x: -1, y: -64}
+        - {x: -2, y: -61}
+        - {x: -7, y: -60}
+        - {x: -9, y: -62}
+        - {x: -8, y: -65}
+        - {x: -4, y: -66}
+      - - {x: -10, y: -64}
+        - {x: -10, y: -61}
+        - {x: -13, y: -60}
+        - {x: -15, y: -62}
+        - {x: -13, y: -65}
+      - - {x: -39, y: -69}
+        - {x: -40, y: -66}
+        - {x: -43, y: -66}
+        - {x: -45, y: -68}
+        - {x: -44, y: -71}
+        - {x: -41, y: -71}
+      - - {x: 11, y: -73}
+        - {x: 13, y: -71}
+        - {x: 13, y: -67}
+        - {x: 0, y: -67}
+        - {x: 0, y: -71}
+        - {x: 2, y: -74}
+        - {x: 9, y: -74}
+      - - {x: -60, y: -71}
+        - {x: -60, y: -68}
+        - {x: -63, y: -67}
+        - {x: -65, y: -69}
+        - {x: -63, y: -72}
+      - - {x: 87, y: -73}
+        - {x: 87, y: -70}
+        - {x: 84, y: -69}
+        - {x: 82, y: -71}
+        - {x: 84, y: -74}
+      - - {x: -3, y: -74}
+        - {x: -3, y: -71}
+        - {x: -6, y: -70}
+        - {x: -8, y: -72}
+        - {x: -6, y: -75}
+      - - {x: -127, y: -57}
+        - {x: -128, y: -58}
+        - {x: -128, y: -71}
+        - {x: -126, y: -73}
+        - {x: -125, y: -73}
+        - {x: -117, y: -69}
+        - {x: -116, y: -66}
+        - {x: -116, y: -62}
+        - {x: -111, y: -67}
+        - {x: -106, y: -67}
+        - {x: -104, y: -70}
+        - {x: -102.161285, y: -69.3871}
+        - {x: -101, y: -72}
+        - {x: -84, y: -72}
+        - {x: -84, y: -66}
+        - {x: -94, y: -56}
+        - {x: -104, y: -56}
+        - {x: -106, y: -57}
+        - {x: -106, y: -60}
+        - {x: -105.83333, y: -60.5}
+        - {x: -110, y: -58}
+        - {x: -116, y: -58}
+        - {x: -117, y: -57}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c06d58950d42e33e0800000000000000
+      internalID: -2072178301270108660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_28
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 384
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -86}
+        - {x: 128, y: -52}
+        - {x: 122, y: -49}
+        - {x: 104, y: -49}
+        - {x: 101, y: -54}
+        - {x: 101, y: -79}
+        - {x: 102, y: -94}
+        - {x: 126, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 910b9ebbbfa8d3d70800000000000000
+      internalID: 9024522042114420761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_29
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 384
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -50}
+        - {x: 127, y: -49}
+        - {x: 103, y: -49}
+        - {x: 101, y: -54}
+        - {x: 101, y: -88}
+        - {x: 105, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b17f0bebe0abe3c0800000000000000
+      internalID: -4329189681665183304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: 109, y: -49}
+        - {x: 101, y: -51}
+        - {x: 101, y: -77}
+        - {x: 106, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b71abc2891ab2520800000000000000
+      internalID: 2678412078359386039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_31
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: 109, y: -49}
+        - {x: 101, y: -51}
+        - {x: 101, y: -77}
+        - {x: 106, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: beccf249d761e07a0800000000000000
+      internalID: -6409160491088753429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_32
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 192
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: 109, y: -49}
+        - {x: 101, y: -51}
+        - {x: 101, y: -77}
+        - {x: 106, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c40cde3111a0c5460800000000000000
+      internalID: 7231666170115244108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_33
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 192
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: 109, y: -49}
+        - {x: 101, y: -51}
+        - {x: 101, y: -77}
+        - {x: 106, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41e87b479a48ebed0800000000000000
+      internalID: -2396332088371999212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_34
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 192
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -51}
+        - {x: 126, y: -49}
+        - {x: 109, y: -49}
+        - {x: 101, y: -51}
+        - {x: 101, y: -77}
+        - {x: 106, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3efe9abf42a77d1d0800000000000000
+      internalID: -3326055500530192413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -69}
+        - {x: 121, y: -66}
+        - {x: 104, y: -66}
+        - {x: 101, y: -72}
+        - {x: 101, y: -94}
+        - {x: 103, y: -95}
+        - {x: 128, y: -95}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a1fa88135cb7aa60800000000000000
+      internalID: 7685318354211107235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_36
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -79}
+        - {x: 122, y: -76}
+        - {x: 104, y: -76}
+        - {x: 101, y: -80}
+        - {x: 101, y: -92}
+        - {x: 102, y: -94}
+        - {x: 128, y: -94}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bf2995f43b499fa0800000000000000
+      internalID: -5793516754804592718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_37
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -81}
+        - {x: 99, y: -81}
+        - {x: 99, y: -95}
+        - {x: 100, y: -96}
+        - {x: 128, y: -96}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4870fde35acc21640800000000000000
+      internalID: 5049323142332221316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamProjectileFinished_38
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 128, y: -81}
+        - {x: 99, y: -81}
+        - {x: 99, y: -95}
+        - {x: 100, y: -96}
+        - {x: 128, y: -96}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bfd1372abd054ea6bdaf54e71a8bc33
+      internalID: -1744492746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 6bbc9ea5f8ece485bb8ccac4950cc24b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":8.0},"gridSpriteSize":{"x":256.0,"y":192.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      BeamProjectileFinished_0: -8436330824384470474
+      BeamProjectileFinished_1: -6523430697507527713
+      BeamProjectileFinished_10: 1507414791419795860
+      BeamProjectileFinished_11: 8062218589026292805
+      BeamProjectileFinished_12: 6911613709679525551
+      BeamProjectileFinished_13: -363448941529216464
+      BeamProjectileFinished_14: 3361688019162355847
+      BeamProjectileFinished_15: 654001223311476911
+      BeamProjectileFinished_16: -4219545607684260410
+      BeamProjectileFinished_17: 600291381681391630
+      BeamProjectileFinished_18: 2651638568424296906
+      BeamProjectileFinished_19: -2765411424812897088
+      BeamProjectileFinished_2: -2591196337394280553
+      BeamProjectileFinished_20: -5474077808764215677
+      BeamProjectileFinished_21: -5828403264653325289
+      BeamProjectileFinished_22: 6735730414071270734
+      BeamProjectileFinished_23: -6362197365607361340
+      BeamProjectileFinished_24: -4618677799291414394
+      BeamProjectileFinished_25: -2157993262048153274
+      BeamProjectileFinished_26: -4422825308564618137
+      BeamProjectileFinished_27: -2072178301270108660
+      BeamProjectileFinished_28: 9024522042114420761
+      BeamProjectileFinished_29: -4329189681665183304
+      BeamProjectileFinished_3: 859372123071033272
+      BeamProjectileFinished_30: 2678412078359386039
+      BeamProjectileFinished_31: -6409160491088753429
+      BeamProjectileFinished_32: 7231666170115244108
+      BeamProjectileFinished_33: -2396332088371999212
+      BeamProjectileFinished_34: -3326055500530192413
+      BeamProjectileFinished_35: 7685318354211107235
+      BeamProjectileFinished_36: -5793516754804592718
+      BeamProjectileFinished_37: 5049323142332221316
+      BeamProjectileFinished_38: -1744492746
+      BeamProjectileFinished_4: 1221633808625088233
+      BeamProjectileFinished_5: -4945415588732099181
+      BeamProjectileFinished_6: 5168769737889521352
+      BeamProjectileFinished_7: -729334083239150016
+      BeamProjectileFinished_8: 3419339934662721065
+      BeamProjectileFinished_9: -5168914189248130744
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

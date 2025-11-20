@@ -17,6 +17,7 @@ namespace HellTiles.Projectiles
         [SerializeField] private bool useCustomColumns = false;
         [SerializeField] private int leftColumn = -5;  // cell column to use when spawning from the left
         [SerializeField] private int rightColumn = 5;  // cell column to use when spawning from the right
+        [SerializeField] private int[] allowedRows = System.Array.Empty<int>(); // explicit row list
 
         public void SpawnProjectile()
         {
@@ -26,26 +27,30 @@ namespace HellTiles.Projectiles
                 return;
             }
 
-            var bounds = gridController.WalkableTilemap.cellBounds;
+            var tilemap = gridController.WalkableTilemap;
+            var bounds = tilemap.cellBounds;
             if (bounds.size.y <= 0)
             {
                 return;
             }
 
             // Pick a random row within tilemap bounds.
-            var y = Random.Range(bounds.yMin, bounds.yMax);
+            var y = allowedRows.Length > 0
+                ? allowedRows[Random.Range(0, allowedRows.Length)]
+                : Random.Range(bounds.yMin, bounds.yMax);
+
             var startFromLeft = Random.value > 0.5f;
 
             // Determine spawn column: either just outside bounds or a custom column you set.
             var spawnX = startFromLeft
                 ? (useCustomColumns ? leftColumn : bounds.xMin - 1)
-                : (useCustomColumns ? rightColumn : bounds.xMax);
+            : (useCustomColumns ? rightColumn : bounds.xMax);
 
             var spawnCell = new Vector3Int(spawnX, y, 0);
             var spawnPos = gridController.CellToWorldCenter(spawnCell) + (startFromLeft ? Vector3.left : Vector3.right) * horizontalPadding;
 
             var hazard = Instantiate(sweepPrefab, spawnPos, Quaternion.identity);
-            hazard.Initialise(!startFromLeft); // flip when going right->left
+            hazard.Initialise(!startFromLeft);
         }
     }
 }
