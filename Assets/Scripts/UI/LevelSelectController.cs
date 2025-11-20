@@ -17,6 +17,7 @@ namespace HellTiles.UI
         }
 
         [SerializeField] private Transform cursor;
+        [SerializeField] private Transform? playerVisual;
         [SerializeField] private LevelNode[] nodes = System.Array.Empty<LevelNode>();
         [SerializeField] private KeyCode leftKey = KeyCode.A;
         [SerializeField] private KeyCode rightKey = KeyCode.D;
@@ -32,6 +33,8 @@ namespace HellTiles.UI
         private void Start()
         {
             UpdateCursorPosition();
+            UpdatePlayerPosition();
+            UpdatePlayerPosition();
         }
 
         private void Update()
@@ -76,6 +79,7 @@ namespace HellTiles.UI
 
             currentIndex = Mathf.Clamp(currentIndex + direction, 0, nodes.Length - 1);
             UpdateCursorPosition();
+            UpdatePlayerPosition();
         }
 
         private void ToggleLevelNode(bool goingUp)
@@ -101,6 +105,7 @@ namespace HellTiles.UI
                 {
                     cursor.position = node.basePosition.position;
                 }
+                UpdatePlayerPosition();
             }
         }
 
@@ -128,6 +133,21 @@ namespace HellTiles.UI
             if (target != null && cursor != null)
             {
                 cursor.position = target.position;
+            }
+        }
+
+        private void UpdatePlayerPosition()
+        {
+            if (playerVisual == null)
+            {
+                return;
+            }
+
+            var node = nodes[currentIndex];
+            var target = node.basePosition;
+            if (target != null)
+            {
+                playerVisual.position = target.position;
             }
         }
     }
