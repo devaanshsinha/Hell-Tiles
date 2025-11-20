@@ -25,7 +25,7 @@ Planned features (from Conner's design notes):
 
 - Unity project created locally (version **6.2 / 6000.2.9f1**) and source control configured (Git, GitHub remote, Git LFS, Unity Smart Merge).
 - Placeholder art added in `Assets/Art/` for background, player, and tile sprites.
-- `New Game` scene: minimal UI (TextMeshPro “Press Space” text) with `NewGameSceneController` that loads `Tutorial`.
+- `New Game` scene: minimal UI (TextMeshPro “Press Space” or “Press S for Shop”) with `NewGameSceneController` that loads `Tutorial` on space or `Shop` on S.
 - `Tutorial` scene: instructions UI plus `TutorialSceneController` (press space to proceed into gameplay).
 - `SampleScene.unity` currently includes:
   - `Grid` + Tilemap with a 6×4 walkable layout.
@@ -44,7 +44,8 @@ Planned features (from Conner's design notes):
     - Heart icons bound to `PlayerHealth`.
     - Coin counter bound to `CoinWallet` (PlayerPrefs-backed).
     - `CountdownController` overlay that fades out after a 3-2-1-GO countdown, then enables gameplay scripts (player movement, projectile director, pickups, etc.).
-- `Game Over` scene: displays last and best survival times via `GameOverSceneController`, waits for spacebar to return to `New Game`.
+- `Game Over` scene: displays last and best scores via `GameOverSceneController`, waits for spacebar to return to `New Game`.
+- `Shop` scene: `ShopController` manages five skin tiles laid out horizontally; `A/D` moves selection, `Enter` attempts purchase (deducting coins from `CoinWallet`), and `Escape` returns to `New Game`. Each tile shows the sprite, price, owned badge, and highlight.
 - UI elements (SampleScene):
   - Canvas with TextMeshPro score counter (points per second) driven by `SurvivalTimer`.
   - Hearts UI panel linked to `PlayerHealth`.
@@ -54,7 +55,7 @@ Planned features (from Conner's design notes):
   - `New Game` scene listens for space to jump into the tutorial (`NewGameSceneController`).
   - `Tutorial` scene listens for space to enter the main gameplay (`TutorialSceneController`).
   - `SampleScene` runs the core loop and loads `Game Over` on death (`PlayerHealth`).
-  - `Game Over` scene displays last/best scores and listens for space to return to `New Game` (`GameOverSceneController`).
+- `Shop` scene displays available skins, listens for `A/D` to move selection, `Enter` to buy, `Escape` to return to `New Game`.
 - Scripts (C#):
   - `Assets/Scripts/Tiles/TileGridController.cs` – grid queries, walkable checks, tile bounce transform animation.
   - `Assets/Scripts/Player/PlayerGridMover.cs` – input-driven tile hopping with landing bounce.
@@ -63,7 +64,7 @@ Planned features (from Conner's design notes):
   - `Assets/Scripts/Projectiles/ProjectileSpawner.cs`, `HomingProjectileTrack.cs`, `ArrowProjectileTrack.cs`, `RowSweepTrack.cs` – individual projectile tracks (straight, homing, random arrows, row sweep).
   - `Assets/Scripts/Projectiles/ProjectileDirector.cs`, `ProjectileRegistry.cs`, `IProjectileTrack.cs` – central coordinator that schedules all projectile tracks and enforces a max bullet count.
   - `Assets/Scripts/Powerups/HeartPickup.cs`, `HeartSpawner.cs`, `CoinPickup.cs`, `CoinSpawner.cs` – timed pickups and spawn management for hearts/coins.
-  - `Assets/Scripts/UI/NewGameSceneController.cs`, `TutorialSceneController.cs`, `GameOverSceneController.cs`, `CountdownController.cs`, `CoinCounter.cs`, `CoinWallet.cs`, `GameSessionData.cs`, `SurvivalTimer.cs` – scene flow, countdown, persistent coins/score HUD (score and coin totals are stored via PlayerPrefs).
+  - `Assets/Scripts/UI/NewGameSceneController.cs`, `TutorialSceneController.cs`, `GameOverSceneController.cs`, `ShopController.cs`, `CountdownController.cs`, `CoinCounter.cs`, `CoinWallet.cs`, `GameSessionData.cs`, `SurvivalTimer.cs` – scene flow, shop, countdown, persistent coins/score HUD (score and coin totals stored via PlayerPrefs).
 - Input: `Assets/InputSystem_Actions.inputactions` (default template) supplies the `Move` action bound to keyboard/gamepad.
 - Layer collisions configured so projectiles only hit the player.
 

@@ -5,14 +5,26 @@ namespace HellTiles.UI
 {
     public class NewGameSceneController : MonoBehaviour
     {
-        [SerializeField] private string tutorialSceneName = "Tutorial"; // first stop after menu
+        [SerializeField] private string levelSelectSceneName = "LevelSelect";
+        [SerializeField] private string tutorialSceneName = "Tutorial";
         [SerializeField] private string shopSceneName = "Shop";
-        [SerializeField] private KeyCode advanceKey = KeyCode.Space;
+        [SerializeField] private KeyCode tutorialKey = KeyCode.Space;
+        [SerializeField] private KeyCode levelSelectKey = KeyCode.Return;
         [SerializeField] private KeyCode shopKey = KeyCode.S;
 
         private void Update()
         {
-            if (Input.GetKeyDown(advanceKey)) // press space to start
+            if (Input.GetKeyDown(levelSelectKey))
+            {
+                if (!Application.CanStreamedLevelBeLoaded(levelSelectSceneName))
+                {
+                    Debug.LogWarning($"Scene '{levelSelectSceneName}' is not added to Build Settings.");
+                    return;
+                }
+
+                SceneManager.LoadScene(levelSelectSceneName);
+            }
+            else if (Input.GetKeyDown(tutorialKey))
             {
                 if (!Application.CanStreamedLevelBeLoaded(tutorialSceneName))
                 {
