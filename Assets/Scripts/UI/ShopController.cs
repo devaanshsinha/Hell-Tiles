@@ -17,6 +17,7 @@ namespace HellTiles.UI
             public int cost = 10;
             public GameObject? selectorHighlight;
             public GameObject? purchasedBadge;
+            public GameObject? equippedBadge;
             public TMP_Text? label;
             public TMP_Text? costLabel;
         }
@@ -25,6 +26,7 @@ namespace HellTiles.UI
         [SerializeField] private KeyCode moveLeftKey = KeyCode.A;
         [SerializeField] private KeyCode moveRightKey = KeyCode.D;
         [SerializeField] private KeyCode purchaseKey = KeyCode.Return;
+        [SerializeField] private KeyCode equipKey = KeyCode.E;
         [SerializeField] private TMP_Text? infoLabel;
         [SerializeField] private string menuSceneName = "New Game";
         [SerializeField] private KeyCode exitKey = KeyCode.Escape;
@@ -68,6 +70,10 @@ namespace HellTiles.UI
             else if (Input.GetKeyDown(purchaseKey))
             {
                 AttemptPurchase(items[currentIndex]);
+            }
+            else if (Input.GetKeyDown(equipKey))
+            {
+                EquipItem(items[currentIndex]);
             }
             else if (Input.GetKeyDown(exitKey))
             {
@@ -119,12 +125,31 @@ namespace HellTiles.UI
             RefreshSelection();
         }
 
+        private void EquipItem(ShopItemView item)
+        {
+            if (!IsOwned(item.itemId))
+            {
+                DisplayMessage("Buy it first");
+                return;
+            }
+
+            PlayerPrefs.SetString("hellTiles_equippedSkin", item.itemId);
+            PlayerPrefs.Save();
+            DisplayMessage($"Equipped {item.itemId}");
+            RefreshSelection();
+        }
+
         private bool IsOwned(string itemId)
         {
             return PlayerPrefs.GetInt(GetOwnedKey(itemId), 0) == 1;
         }
 
         private static string GetOwnedKey(string itemId) => $"hellTiles_skin_{itemId}";
+
+        private static bool IsEquipped(string itemId)
+        {
+            return PlayerPrefs.GetString("hellTiles_equippedSkin", string.Empty) == itemId;
+        }
 
         private void UpdateItemVisual(ShopItemView view, bool isSelected, bool owned)
         {
@@ -136,6 +161,11 @@ namespace HellTiles.UI
             if (view.purchasedBadge != null)
             {
                 view.purchasedBadge.SetActive(owned);
+            }
+
+            if (view.equippedBadge != null)
+            {
+                view.equippedBadge.SetActive(IsEquipped(view.itemId));
             }
 
             if (view.label != null)
