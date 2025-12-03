@@ -2,177 +2,91 @@
 
 ## Current Status
 
-The foundational **Hell Tiles** Unity project setup is complete and a playable prototype is live. We now have a four-scene loop (`New Game → Tutorial → SampleScene → Game Over → New Game`). `SampleScene` contains a placeholder tilemap arena, a controllable player that hops between tiles, projectile spawners (standard and optional homing), a three-heart health system with blinking feedback, heart pickups, and a HUD score counter that increments every second. This file keeps AI assistants aligned with real project progress so future work builds on the latest implementation.
+Playable prototype is live. Scene flow now spans **New Game → Tutorial → SampleScene → Game Over → New Game**, plus optional **Shop** and **LevelSelect** scenes. Gameplay features include grid-based hopping on a tilemap, multiple projectile patterns, hearts and coin pickups with persistence, countdown gating, and a points-per-second score system. Shop purchases and equipped skin selection are stored locally.
 
 ---
 
 ## Project Summary
 
-**Hell Tiles** is a top-down, 2D pixel-art bullet-hell survival game being built in **Unity 6.2 (6000.2.9f1)**. The player will hop between floating tiles on a lava grid while dodging projectiles and surviving timed waves. Each tile type behaves differently, creating strategic and reactive gameplay. As players survive longer, difficulty and intensity increase.
-
-Planned features (from Conner's design notes):
-
-- Grid-based tile movement (Crossy Road-style)
-- Multiple tile types (Normal, Spike, Sticky, Push, Health, Coin, Wall)
-- Increasing tile and projectile frequency with time
-- "Juice" — screen shake, blinking tiles, dust particles, sounds, afterimages, etc.
-- Permanent upgrade shop system for positive feedback loop
-- Exit tile and level progression after survival period
+**Hell Tiles** is a 2D grid-based bullet-hell built in **Unity 6.2 (6000.2.9f1)**. The player hops between lava-floating tiles, dodges varied projectiles, and collects pickups. Difficulty and feedback will ramp up over time via new tiles, hazards, and “juice”.
 
 ---
 
-## Current Implementation
+## Scenes and Flow
 
-- Unity project created locally (version **6.2 / 6000.2.9f1**) and source control configured (Git, GitHub remote, Git LFS, Unity Smart Merge).
-- Placeholder art added in `Assets/Art/` for background, player, and tile sprites.
-- `New Game` scene: minimal UI (TextMeshPro “Press Space” or “Press S for Shop”) with `NewGameSceneController` that loads `Tutorial` on space or `Shop` on S.
-- `Tutorial` scene: instructions UI plus `TutorialSceneController` (press space to proceed into gameplay).
-- `SampleScene.unity` currently includes:
-  - `Grid` + Tilemap with a 6×4 walkable layout.
-  - Background sprite renderer positioned beneath the board.
-  - `Player` GameObject (sprite + `Rigidbody2D`) with grid-based movement (`PlayerGridMover`) and health (`PlayerHealth`, three-heart UI, invulnerability bounce).
-  - Projectile director setup:
-    - `ProjectileDirector` orchestrates all projectile tracks and enforces a global cap (50 active shots by default).
-    - `ProjectileSpawner` track handles the original straight fireballs aimed at the player.
-    - `HomingProjectileTrack` spawns the “continuous tracking” variant every ~15 seconds.
-    - `ArrowProjectileTrack` launches random arrows between walkable tiles to keep the board busy.
-    - `RowSweepTrack` spawns a row-clearing hazard (animated spray across an entire tile row).
-  - `HeartSpawner` manager that periodically instantiates `HeartPickup` prefabs on random walkable tiles; pickups can be collected even at max health (wastes the pickup) and self-despawn after 4s with a flicker warning.
-  - `CoinSpawner` for animated coin pickups; coins auto-flicker before despawning and increment a persistent coin wallet.
-  - HUD overlay with:
-    - Score counter (`SurvivalTimer`) that accrues points per second (stored in `GameSessionData`, PlayerPrefs-backed).
-    - Heart icons bound to `PlayerHealth`.
-    - Coin counter bound to `CoinWallet` (PlayerPrefs-backed).
-    - `CountdownController` overlay that fades out after a 3-2-1-GO countdown, then enables gameplay scripts (player movement, projectile director, pickups, etc.).
-- `Game Over` scene: displays last and best scores via `GameOverSceneController`, waits for spacebar to return to `New Game`.
-- `Shop` scene: `ShopController` manages five skin tiles laid out horizontally; `A/D` moves selection, `Enter` attempts purchase (deducting coins from `CoinWallet`), and `Escape` returns to `New Game`. Each tile shows the sprite, price, owned badge, and highlight.
-- UI elements (SampleScene):
-  - Canvas with TextMeshPro score counter (points per second) driven by `SurvivalTimer`.
-  - Hearts UI panel linked to `PlayerHealth`.
-  - Coin counter (`CoinCounter`) showing the persistent value from `CoinWallet`.
-  - Fullscreen countdown panel (`CountdownController`) that locks gameplay until the 3-2-1-Go animation completes and then re-enables the projectile director, player mover, and pickup spawners.
-- Scene flow:
-  - `New Game` scene listens for space to jump into the tutorial (`NewGameSceneController`).
-  - `Tutorial` scene listens for space to enter the main gameplay (`TutorialSceneController`).
-  - `SampleScene` runs the core loop and loads `Game Over` on death (`PlayerHealth`).
-- `Shop` scene displays available skins, listens for `A/D` to move selection, `Enter` to buy, `Escape` to return to `New Game`.
-- Scripts (C#):
-  - `Assets/Scripts/Tiles/TileGridController.cs` – grid queries, walkable checks, tile bounce transform animation.
-  - `Assets/Scripts/Player/PlayerGridMover.cs` – input-driven tile hopping with landing bounce.
-  - `Assets/Scripts/Player/PlayerHealth.cs` – heart tracking, hit blink, scene transition to `Game Over`.
-  - `Assets/Scripts/Projectiles/BasicProjectile.cs` – straight-line or homing projectiles (auto-register with director).
-  - `Assets/Scripts/Projectiles/ProjectileSpawner.cs`, `HomingProjectileTrack.cs`, `ArrowProjectileTrack.cs`, `RowSweepTrack.cs` – individual projectile tracks (straight, homing, random arrows, row sweep).
-  - `Assets/Scripts/Projectiles/ProjectileDirector.cs`, `ProjectileRegistry.cs`, `IProjectileTrack.cs` – central coordinator that schedules all projectile tracks and enforces a max bullet count.
-  - `Assets/Scripts/Powerups/HeartPickup.cs`, `HeartSpawner.cs`, `CoinPickup.cs`, `CoinSpawner.cs` – timed pickups and spawn management for hearts/coins.
-  - `Assets/Scripts/UI/NewGameSceneController.cs`, `TutorialSceneController.cs`, `GameOverSceneController.cs`, `ShopController.cs`, `CountdownController.cs`, `CoinCounter.cs`, `CoinWallet.cs`, `GameSessionData.cs`, `SurvivalTimer.cs` – scene flow, shop, countdown, persistent coins/score HUD (score and coin totals stored via PlayerPrefs).
-- Input: `Assets/InputSystem_Actions.inputactions` (default template) supplies the `Move` action bound to keyboard/gamepad.
-- Layer collisions configured so projectiles only hit the player.
+- **New Game** (`NewGameSceneController`):  
+  - `Space` → `Tutorial` scene.  
+  - `Enter` → `LevelSelect` scene.  
+  - `S` → `Shop` scene.
+- **Tutorial** (`TutorialSceneController`): `Space` starts `SampleScene`.
+- **LevelSelect** (`LevelSelectController`): Mario-style path. `A/D` move left/right along bases, `W/S` climb to level nodes, `Enter` loads the selected level, `Escape` returns to New Game. Requires a cursor object, player visual, and an ordered list of base nodes (with optional elevated child nodes for levels).
+- **SampleScene**: Core gameplay (see Systems below). On death, `PlayerHealth` loads `Game Over`.
+- **Game Over** (`GameOverSceneController`): Shows last score and best score; `Space` returns to `New Game`.
+- **Shop** (`ShopController`): Five horizontal tiles. `A/D` to change selection, `Enter` to buy (deducts from `CoinWallet`), `E` to equip owned skin, `Escape` returns to `New Game`. Badges: “Owned” and “Equipped” highlights per tile.
 
 ---
 
-## Repository Structure
+## Systems in SampleScene
 
-```
-Hell Tiles/
-├── Assets/
-│   ├── Art/
-│   ├── Audio/
-│   ├── Materials/
-│   ├── Prefabs/
-│   ├── Scenes/
-│   ├── Scripts/
-│   │   ├── Player/
-│   │   ├── Tiles/
-│   │   ├── Projectiles/
-│   │   └── UI/
-│   └── VFX/
-├── ProjectSettings/
-├── Packages/
-├── .gitignore
-├── .gitattributes
-├── README.md
-└── chat.md
-```
+- **Grid & Movement**
+  - `TileGridController`: walkable checks, snap positions, tile bounce on land/step.
+  - `PlayerGridMover`: WASD/grid input to hop tile-to-tile with hop curve and bounce.
+  - `PlayerHealth`: three-heart system, blink/invulnerability, death → Game Over.
 
-Structure is now populated with placeholder art, prototype scripts, and initial UI scenes.
+- **Projectiles**
+  - `ProjectileDirector`: central scheduler with global cap (default 50) and multiple tracks.
+  - Tracks:
+    - `ProjectileSpawner`: straight fireballs toward the player.
+    - `HomingProjectileTrack`: homing variant (uses `BasicProjectile` with `continuousTracking`).
+    - `ArrowProjectileTrack`: random-direction arrows between tiles.
+    - `RowSweepTrack`: side-originating spray that clears a whole row (row/column ranges configurable).
+  - `BasicProjectile`: moves forward or homes, self-limits via `ProjectileRegistry`.
 
----
+- **Pickups**
+  - `HeartSpawner` + `HeartPickup`: spawns on random walkable tiles; collectable even at max hearts (wasted). Lives 2.5s, flickers 1.5s, then despawns.
+  - `CoinSpawner` + `CoinPickup`: animated coin, flickers before despawn. Increments `CoinWallet` (persistent).
+  - Spawn positions use `TileGridController` walkable queries.
 
-## Development Tools and Setup
-
-- **Unity Editor Version:** 6.2 (6000.2.9f1)
-- **Version Control:** Git with GitHub remote
-- **Large File Handling:** Git LFS for images, audio, and binary assets
-- **Merge Tool:** UnityYAMLMerge (configured via global Git config)
-  - To resolve conflicts in scenes or prefabs, developers must use:
-    ```bash
-    git mergetool
-    ```
-    This will automatically trigger UnityYAMLMerge instead of the default Git text merge.
-- **Branching Model:**
-  - `main` → stable builds only
-  - `develop` → integration branch
-  - `feature/*` → individual tasks (e.g., `feature/player-movement`)
+- **Score & HUD**
+  - `SurvivalTimer`: accrues points per second (not minutes/seconds). Best score stored in `GameSessionData` (PlayerPrefs).
+  - HUD: score TextMeshPro, hearts bound to `PlayerHealth`, coin counter bound to `CoinWallet`.
+  - `CountdownController`: 3-2-1-Go overlay; fades a CanvasGroup, then enables gameplay scripts (player mover, projectile director, pickup spawners, etc.).
 
 ---
 
-## Instructor Feedback (as of Oct 23, 2025)
+## Persistence
 
-Conner’s updated notes include previously listed directives plus the latest to-do items:
-
-- Implement tile system with positive/neutral/negative tiles (heart, angel, coin pickups; neutral tile; spike, push, wall, cracked tiles).
-- Randomly replace tiles with “juice” effects; add bounce/juice when stepping on tiles and during player movement.
-- Add instructions/tutorial level and a main menu.
-- Add hi-score tracking based on survival time; show hi-score/time on Game Over.
-- Add score multiplier for hearts kept and bonus points for near misses.
-- Add projectile difficulty scaling and “juice” for projectile spawning, near misses, and player impacts.
-- Make hitbox more lenient, overall pace faster, and delay projectile spawning with an opening countdown.
-- Add level progression with unique layouts that introduce mechanics gradually.
-- Ensure positive feedback is immediate and noticeable.
-
-Most of these directives are pending implementation; focus is on incrementally adding systems while preserving current prototype functionality.
+- `GameSessionData`: wraps PlayerPrefs for best score and coins.
+- `CoinWallet`: holds current coins, saves to PlayerPrefs, exposes change events; used by HUD and Shop.
+- `ShopController`: saves ownership/equipped skin in PlayerPrefs.
 
 ---
 
-## Commands and Rules for AI (LLMs)
+## Key Scripts (by folder)
 
-To maintain project consistency, any connected AI system must follow these rules:
-
-1. **Do not execute shell commands automatically.**  
-   The AI may only _generate_ or _explain_ commands — never run them.
-
-2. **Allowed actions:**
-
-   - Create, edit, or remove files (Folders, files, Unity scripts, Markdown docs, JSON, etc.)
-   - Explain or document repository structure
-   - Suggest or make Unity/C# code changes
-
-3. **Merge behavior:**
-
-   - All `.unity` and `.prefab` merge conflicts must use `git mergetool`  
-     (which calls **UnityYAMLMerge**) for consistent resolution.
-   - The AI must not suggest alternative manual merging methods.
-
-4. **Scope limitation:**  
-   The AI must only reference and modify files that belong to the **Hell Tiles** repository.  
-   It must never operate outside this folder or modify global system files.
-
-5. **Consistency:**  
-   The AI should always assume the current state includes:
-
-   - Unity 6.2 (6000.2.9f1)
-   - Placeholder arena (Tilemap) and player sprite already placed in `SampleScene`
-   - Player grid movement via `PlayerGridMover` and tile queries handled by `TileGridController`
-   - Additional systems (enemies, hazards, UI, etc.) still pending
-
-6. **Future updates:**  
-   When new scripts or assets are added, this `chat.md` file will be updated with:
-   - Script purpose
-   - High-level function descriptions
-   - Dependencies between systems
+- **Tiles:** `TileGridController` (walkable queries, bounce).
+- **Player:** `PlayerGridMover` (hops), `PlayerHealth` (hearts, blink, death).
+- **Projectiles:** `BasicProjectile`, `ProjectileSpawner`, `HomingProjectileTrack`, `ArrowProjectileTrack`, `RowSweepTrack`, `ProjectileDirector`, `ProjectileRegistry`, `IProjectileTrack`, `RowSweepHazard`.
+- **Powerups:** `HeartPickup`, `HeartSpawner`, `CoinPickup`, `CoinSpawner`.
+- **UI / Flow:** `NewGameSceneController`, `TutorialSceneController`, `GameOverSceneController`, `CountdownController`, `SurvivalTimer`, `CoinCounter`, `CoinWallet`, `GameSessionData`, `ShopController`, `LevelSelectController`.
 
 ---
 
-## Summary
+## Implementation Notes
 
-The **Hell Tiles** project is currently in its foundational stage. The Unity environment, GitHub repository, Git LFS, and Unity Smart Merge have all been successfully configured. The game itself has not yet entered the development or implementation phase. This file exists solely to ensure future AI systems fully understand the context, structure, and progress so far — and adhere to consistent setup and workflow conventions.
+- Layer collision matrix limits projectiles to hitting only the Player layer.
+- All projectiles and pickups respect the walkable tilemap from `TileGridController`.
+- Countdown must finish before `ProjectileDirector`, spawners, and player movement are enabled.
+- Shop tiles show sprite + price; “Owned” and “Equipped” badges start disabled and are toggled by `ShopController`.
+- LevelSelect requires a serialized list of base nodes (ordered path). Optional elevated child transforms mark level nodes; only those can be “entered”.
+- Shop scene should include a coin readout (TMP text) driven by `CoinCounter`/`CoinWallet` to show available currency.
+
+---
+
+## Outstanding Feedback / TODO (latest)
+
+- Add richer tile set (heart/angel/coin pickups, neutral, spike, push, wall, cracked).
+- More “juice”: tile bounce, movement effects, projectile spawn/impact effects, near-miss feedback.
+- Difficulty scaling on projectiles; delay initial spawns with countdown (partially done).
+- Score multiplier for hearts kept; bonus for near-miss; faster overall feel and lenient hitbox.
+- Add main menu, tutorial polish, level progression with unique layouts.

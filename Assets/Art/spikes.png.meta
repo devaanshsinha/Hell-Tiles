@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a4be7761998344eed95e0be26cbce346
+guid: c4ef907de80704dff9004858fd69c7f9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6772576786018478901
-    second: Square_-_black_simple.svg_0
+      213: 8382717070696663976
+    second: spikes_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Square_-_black_simple.svg_0
+      name: spikes_0
       rect:
         serializedVersion: 2
-        x: 392
-        y: 392
-        width: 1264
-        height: 1264
+        x: 0
+        y: 1
+        width: 16
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bc4df47bb49f202a0800000000000000
-      internalID: -6772576786018478901
+      spriteID: 8ab4a7323c4655470800000000000000
+      internalID: 8382717070696663976
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Square_-_black_simple.svg_0: -6772576786018478901
+      spikes_0: 8382717070696663976
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
