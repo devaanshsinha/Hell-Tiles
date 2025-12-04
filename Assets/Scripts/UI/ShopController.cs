@@ -158,6 +158,8 @@ namespace HellTiles.UI
                 view.selectorHighlight.SetActive(isSelected);
             }
 
+            var isEquipped = IsEquipped(view.itemId);
+
             if (view.purchasedBadge != null)
             {
                 view.purchasedBadge.SetActive(owned);
@@ -165,7 +167,7 @@ namespace HellTiles.UI
 
             if (view.equippedBadge != null)
             {
-                view.equippedBadge.SetActive(IsEquipped(view.itemId));
+                view.equippedBadge.SetActive(isEquipped);
             }
 
             if (view.label != null)
@@ -175,7 +177,11 @@ namespace HellTiles.UI
 
             if (view.costLabel != null)
             {
-                view.costLabel.text = owned ? "Owned" : $"{view.cost} coins";
+                view.costLabel.text = isEquipped
+                    ? "Equipped"
+                    : owned
+                        ? "Owned"
+                        : $"{view.cost} coins";
             }
         }
 
