@@ -39,6 +39,7 @@ Playable prototype is live. Scene flow now spans **New Game → Tutorial → Sam
     - `ProjectileSpawner`: straight fireballs toward the player.
     - `HomingProjectileTrack`: homing variant (uses `BasicProjectile` with `continuousTracking`).
     - `ArrowProjectileTrack`: random-direction arrows between tiles.
+    - `ArrowTileTrack`: fires arrows from off-board through a random tile in the [-2..2] grid range and keeps flying straight (uses `DirectionalProjectile` with sprite-forward offset support).
     - `RowSweepTrack`: spawns a row sweep hazard that telegraphs, enables its hitbox, then despawns; pick rows/columns explicitly. Columns < 0 flip the sprite (fires right), columns ≥ 0 keep default orientation. Cleared by Angel pickup.
   - `BasicProjectile`: moves forward or homes, self-limits via `ProjectileRegistry`.
 

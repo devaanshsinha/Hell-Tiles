@@ -67,6 +67,11 @@ namespace HellTiles.Powerups
                 Destroy(sweep.gameObject);
             }
 
+            foreach (var arrow in FindObjectsByType<DirectionalProjectile>(FindObjectsSortMode.None))
+            {
+                Destroy(arrow.gameObject);
+            }
+
             // Ask spawners to clear internal state if present.
             foreach (var spikeSpawner in FindObjectsByType<SpikeSpawner>(FindObjectsSortMode.None))
             {

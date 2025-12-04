@@ -13,7 +13,9 @@ namespace HellTiles.UI
             public string levelSceneName = "SampleScene";
             public Transform? basePosition;
             public Transform? elevatedPosition;
-            public bool unlocked = true;
+            public bool unlocked = true; // initial unlock (e.g., level 1)
+            public bool completed;
+            public GameObject? completedMark; // check mark to enable when completed
         }
 
         [SerializeField] private Transform cursor;
@@ -26,12 +28,17 @@ namespace HellTiles.UI
         [SerializeField] private KeyCode confirmKey = KeyCode.Return;
         [SerializeField] private KeyCode exitKey = KeyCode.Escape;
         [SerializeField] private string menuSceneName = "New Game";
+        [SerializeField, Tooltip("TMP text to show temporary messages.")] private TMPro.TMP_Text? messageLabel;
+        [SerializeField, Tooltip("Seconds a message stays visible.")] private float messageDuration = 1.5f;
 
         private int currentIndex;
         private bool onLevelNode;
+        private float messageTimer;
 
         private void Start()
         {
+            LoadProgress();
+            RefreshCompletionMarks();
             UpdateCursorPosition();
             UpdatePlayerPosition();
             UpdatePlayerPosition();
@@ -68,6 +75,8 @@ namespace HellTiles.UI
             {
                 SceneManager.LoadScene(menuSceneName);
             }
+
+            UpdateMessage();
         }
 
         private void MoveHorizontal(int direction)
@@ -87,6 +96,7 @@ namespace HellTiles.UI
             var node = nodes[currentIndex];
             if (!node.unlocked)
             {
+                ShowMessage("Complete previous level first");
                 return;
             }
 
@@ -112,8 +122,15 @@ namespace HellTiles.UI
         private void LoadCurrentLevel()
         {
             var node = nodes[currentIndex];
-            if (string.IsNullOrWhiteSpace(node.levelSceneName) || !node.unlocked)
+            if (string.IsNullOrWhiteSpace(node.levelSceneName))
             {
+                return;
+            }
+
+            // If not unlocked, block entry.
+            if (!node.unlocked)
+            {
+                ShowMessage("Complete previous level first");
                 return;
             }
 
@@ -148,6 +165,90 @@ namespace HellTiles.UI
             if (target != null)
             {
                 playerVisual.position = target.position;
+            }
+        }
+
+        private void ShowMessage(string text)
+        {
+            if (messageLabel == null)
+            {
+                return;
+            }
+
+            messageLabel.gameObject.SetActive(true);
+            messageLabel.text = text;
+            messageTimer = messageDuration;
+        }
+
+        private void UpdateMessage()
+        {
+            if (messageLabel == null || messageTimer <= 0f)
+            {
+                return;
+            }
+
+            messageTimer -= Time.deltaTime;
+            if (messageTimer <= 0f)
+            {
+                messageLabel.gameObject.SetActive(false);
+            }
+        }
+
+        private void RefreshCompletionMarks()
+        {
+            for (int i = 0; i < nodes.Length; i++)
+            {
+                var node = nodes[i];
+                if (node.completedMark != null)
+                {
+                    node.completedMark.SetActive(node.completed);
+                }
+            }
+        }
+
+        private void LoadProgress()
+        {
+            for (int i = 0; i < nodes.Length; i++)
+            {
+                var completedKey = GetCompletedKey(i);
+                nodes[i].completed = PlayerPrefs.GetInt(completedKey, 0) == 1;
+
+                // Unlock rule: first node can be pre-unlocked; others unlock if previous completed.
+                if (i == 0)
+                {
+                    nodes[i].unlocked = nodes[i].unlocked || nodes[i].completed;
+                }
+                else
+                {
+                    nodes[i].unlocked = nodes[i].completed || nodes[i - 1].completed;
+                }
+            }
+        }
+
+        private static string GetCompletedKey(int index) => $"hellTiles_level_{index}_completed";
+
+        /// <summary>
+        /// Call this after completing a level to mark it done and unlock the next.
+        /// </summary>
+        public void MarkLevelCompleted(int index)
+        {
+            if (index < 0 || index >= nodes.Length)
+            {
+                return;
+            }
+
+            nodes[index].completed = true;
+            PlayerPrefs.SetInt(GetCompletedKey(index), 1);
+            PlayerPrefs.Save();
+
+            if (nodes[index].completedMark != null)
+            {
+                nodes[index].completedMark.SetActive(true);
+            }
+
+            if (index + 1 < nodes.Length)
+            {
+                nodes[index + 1].unlocked = true;
             }
         }
     }
