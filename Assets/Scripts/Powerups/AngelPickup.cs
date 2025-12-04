@@ -85,21 +85,12 @@ namespace HellTiles.Powerups
             if (ringVfxPrefab != null)
             {
                 var vfx = Instantiate(ringVfxPrefab, transform.position, Quaternion.identity);
-                StartCoroutine(DestroyVfxAfter(vfx, ringLifetime));
+                Destroy(vfx, ringLifetime); // ensure VFX cleans up even after this pickup is destroyed
             }
 
             // Notify spawner and destroy self.
             spawner?.HandleCollected(this);
             Destroy(gameObject);
-        }
-
-        private IEnumerator DestroyVfxAfter(GameObject vfx, float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            if (vfx != null)
-            {
-                Destroy(vfx);
-            }
         }
     }
 }

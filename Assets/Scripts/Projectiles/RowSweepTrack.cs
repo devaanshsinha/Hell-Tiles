@@ -13,6 +13,7 @@ namespace HellTiles.Projectiles
         [SerializeField] private TileGridController gridController = default!;
         [SerializeField] private RowSweepHazard sweepPrefab = default!;
         [SerializeField] private float horizontalPadding = 1f; // spawn just outside the grid
+        [SerializeField] private float hazardLifetime = 2f;
         [Header("Spawn Columns")]
         [SerializeField] private bool useCustomColumns = false;
         [SerializeField] private int leftColumn = -5;  // cell column to use when spawning from the left
@@ -50,6 +51,7 @@ namespace HellTiles.Projectiles
             var spawnPos = gridController.CellToWorldCenter(spawnCell) + (startFromLeft ? Vector3.left : Vector3.right) * horizontalPadding;
 
             var hazard = Instantiate(sweepPrefab, spawnPos, Quaternion.identity);
+            hazard.SetLifetime(hazardLifetime);
             hazard.Initialise(!startFromLeft);
         }
     }

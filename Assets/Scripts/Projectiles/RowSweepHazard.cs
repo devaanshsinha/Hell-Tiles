@@ -25,12 +25,19 @@ namespace HellTiles.Projectiles
             }
         }
 
+        private void OnEnable()
+        {
+            elapsed = 0f;
+            // Redundant safety so it cleans up even if Update is disabled.
+            Invoke(nameof(Cleanup), lifeTime);
+        }
+
         private void Update()
         {
             elapsed += Time.deltaTime;
             if (elapsed >= lifeTime)
             {
-                Destroy(gameObject);
+                Cleanup();
             }
         }
 
@@ -42,6 +49,11 @@ namespace HellTiles.Projectiles
             }
         }
 
+        public void SetLifetime(float seconds)
+        {
+            lifeTime = Mathf.Max(0.01f, seconds);
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             var health = other.GetComponent<PlayerHealth>() ?? other.GetComponentInParent<PlayerHealth>();
@@ -49,6 +61,12 @@ namespace HellTiles.Projectiles
             {
                 health.TakeHit();
             }
+        }
+
+        private void Cleanup()
+        {
+            CancelInvoke();
+            Destroy(gameObject);
         }
     }
 }
