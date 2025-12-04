@@ -14,6 +14,7 @@ namespace HellTiles.UI
         [SerializeField, Tooltip("Starting time in seconds.")] private float startSeconds = 80f;
         [SerializeField, Tooltip("Text element to display the remaining time.")] private TMP_Text? timerLabel;
         [SerializeField, Tooltip("Scene to load when the timer reaches zero.")] private string winSceneName = "Won";
+        [SerializeField, Tooltip("Optional tracker to mark the level as completed on timeout.")] private LevelCompletionTracker? completionTracker;
 
         private float remaining;
         private bool finished;
@@ -38,6 +39,7 @@ namespace HellTiles.UI
                 remaining = 0f;
                 finished = true;
                 UpdateLabel();
+                completionTracker?.MarkCompleted();
                 LoadWinScene();
                 return;
             }

@@ -213,14 +213,17 @@ namespace HellTiles.UI
                 var completedKey = GetCompletedKey(i);
                 nodes[i].completed = PlayerPrefs.GetInt(completedKey, 0) == 1;
 
-                // Unlock rule: first node can be pre-unlocked; others unlock if previous completed.
+                // Unlock rule: first node always unlocked; others unlock if they or the previous node are completed,
+                // or if the previous node is a spacer (no level) that is unlocked.
                 if (i == 0)
                 {
-                    nodes[i].unlocked = nodes[i].unlocked || nodes[i].completed;
+                    nodes[i].unlocked = true;
                 }
                 else
                 {
-                    nodes[i].unlocked = nodes[i].completed || nodes[i - 1].completed;
+                    bool prevIsSpacer = string.IsNullOrWhiteSpace(nodes[i - 1].levelSceneName);
+                    bool prevAllows = nodes[i - 1].completed || (prevIsSpacer && nodes[i - 1].unlocked);
+                    nodes[i].unlocked = nodes[i].unlocked || nodes[i].completed || prevAllows;
                 }
             }
         }

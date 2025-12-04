@@ -38,6 +38,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level5.unity
     guid: 4dbd6a8ec28d0401882a17c41de1a61d
+  - enabled: 1
+    path: Assets/Scenes/Won.unity
+    guid: 37ce740d5868f4d398dc09ec79471503
+  - enabled: 1
+    path: Assets/Scenes/Lost.unity
+    guid: a1c7eb0ff344b44738a04ee3a5f72a03
+  - enabled: 1
+    path: Assets/Scenes/Level_Select_tut.unity
+    guid: e0a37b443213b4de28aa7725a33c1ef3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

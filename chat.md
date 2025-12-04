@@ -76,7 +76,7 @@ Playable prototype is live. Scene flow now spans **New Game → Tutorial → Sam
 - **Projectiles:** `BasicProjectile`, `ProjectileSpawner`, `HomingProjectileTrack`, `ArrowProjectileTrack`, `RowSweepTrack`, `ProjectileDirector`, `ProjectileRegistry`, `IProjectileTrack`, `RowSweepHazard`.
 - **Hazards:** `SpikeHazard`, `SpikeSpawner`, `CrackedTile`, `CrackedTileSpawner`.
 - **Powerups:** `HeartPickup`, `HeartSpawner`, `CoinPickup`, `CoinSpawner`.
-- **UI / Flow:** `NewGameSceneController`, `TutorialSceneController`, `GameOverSceneController`, `CountdownController`, `SurvivalTimer`, `CoinCounter`, `CoinWallet`, `GameSessionData`, `ShopController`, `LevelSelectController`.
+- **UI / Flow:** `NewGameSceneController`, `TutorialSceneController`, `GameOverSceneController`, `CountdownController`, `SurvivalTimer`, `CoinCounter`, `CoinWallet`, `GameSessionData`, `ShopController`, `LevelSelectController`, `LevelCompletionTracker` (marks level complete; can return to LevelSelect), `LevelCountdownTimer` (auto-marks completion via tracker and loads Win scene on timeout).
 
 ---
 
