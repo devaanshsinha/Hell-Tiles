@@ -62,6 +62,11 @@ namespace HellTiles.Powerups
                 Destroy(crack.gameObject);
             }
 
+            foreach (var sweep in FindObjectsByType<RowSweepHazard>(FindObjectsSortMode.None))
+            {
+                Destroy(sweep.gameObject);
+            }
+
             // Ask spawners to clear internal state if present.
             foreach (var spikeSpawner in FindObjectsByType<SpikeSpawner>(FindObjectsSortMode.None))
             {
@@ -76,6 +81,11 @@ namespace HellTiles.Powerups
             foreach (var crackedSpawner in FindObjectsByType<CrackedTileSpawner>(FindObjectsSortMode.None))
             {
                 crackedSpawner.ClearAll();
+            }
+
+            foreach (var sweepTrack in FindObjectsByType<RowSweepTrack>(FindObjectsSortMode.None))
+            {
+                sweepTrack.ClearAll();
             }
 
             // Reset tiles to original layout.
