@@ -33,6 +33,17 @@ namespace HellTiles.UI
 
         private int currentIndex;
 
+        private void OnEnable()
+        {
+            if (items == null || items.Length == 0)
+            {
+                return;
+            }
+
+            EnsureDefaultOwnedAndEquipped();
+            RefreshSelection();
+        }
+
         private void Start()
         {
             EnsureDefaultOwnedAndEquipped();
