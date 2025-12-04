@@ -15,8 +15,8 @@ namespace HellTiles.Hazards
         private float telegraphBlinkOn = 0.2f;
         [SerializeField, Tooltip("How long each harmless blink stays invisible during telegraphing.")]
         private float telegraphBlinkOff = 0.2f;
-        [SerializeField, Tooltip("How many harmless blinks before the tile becomes fragile. Final state stays visible and armed.")]
-        private int harmlessBlinkCount = 2;
+        [SerializeField, Tooltip("How many visible blinks before the tile arms. Final state stays visible and armed.")]
+        private int telegraphBlinkCount = 3;
         [SerializeField, Tooltip("Seconds after breaking before the original tile is restored.")]
         private float restoreDelay = 10f;
         [SerializeField, Tooltip("Optional visual for telegraphing.")] private SpriteRenderer? telegraphRenderer;
@@ -32,6 +32,7 @@ namespace HellTiles.Hazards
         private bool isVisible;
         private bool isArmed;
         private bool isBroken;
+        private bool playerOnTile;
 
         public void Initialise(CrackedTileSpawner owner, TileGridController grid, Vector3Int spawnCell, TileBase crackedTile)
         {
@@ -60,6 +61,7 @@ namespace HellTiles.Hazards
             isVisible = false;
             isArmed = false;
             isBroken = false;
+            playerOnTile = false;
             SetTelegraphVisible(false);
 
             if (gridController != null)
@@ -99,7 +101,7 @@ namespace HellTiles.Hazards
             if (isVisible)
             {
                 blinksCompleted++;
-                if (blinksCompleted >= harmlessBlinkCount + 1)
+                if (blinksCompleted >= telegraphBlinkCount)
                 {
                     ArmTile();
                 }
@@ -136,8 +138,24 @@ namespace HellTiles.Hazards
                 return;
             }
 
-            // No damage; tile simply breaks after one use.
-            BreakTile();
+            playerOnTile = true;
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (!isArmed || isBroken || !playerOnTile)
+            {
+                return;
+            }
+
+            var health = other.GetComponent<PlayerHealth>() ?? other.GetComponentInParent<PlayerHealth>();
+            if (health == null)
+            {
+                return;
+            }
+
+            playerOnTile = false;
+            BreakTile(); // breaks once the player leaves after first entry
         }
 
         private void BreakTile()
