@@ -18,7 +18,7 @@ namespace HellTiles.UI
             public GameObject? completedMark; // check mark to enable when completed
         }
 
-        [SerializeField] private Transform cursor;
+        [SerializeField] private Transform cursor = default!;
         [SerializeField] private Transform? playerVisual;
         [SerializeField] private LevelNode[] nodes = System.Array.Empty<LevelNode>();
         [SerializeField] private KeyCode leftKey = KeyCode.A;
@@ -240,13 +240,19 @@ namespace HellTiles.UI
                 return;
             }
 
-            nodes[index].completed = true;
+            var node = nodes[index];
+            if (node == null)
+            {
+                return;
+            }
+
+            node.completed = true;
             PlayerPrefs.SetInt(GetCompletedKey(index), 1);
             PlayerPrefs.Save();
 
-            if (nodes[index].completedMark != null)
+            if (node.completedMark != null)
             {
-                nodes[index].completedMark.SetActive(true);
+                node.completedMark.SetActive(true);
             }
 
             if (index + 1 < nodes.Length)

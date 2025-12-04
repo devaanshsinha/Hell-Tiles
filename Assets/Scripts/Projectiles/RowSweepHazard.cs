@@ -90,7 +90,7 @@ namespace HellTiles.Projectiles
                 hitCollider.enabled = true;
 
                 // If the player is already inside when the collider turns on, apply damage immediately.
-                var filter = new ContactFilter2D().NoFilter();
+                var filter = ContactFilter2D.noFilter;
                 filter.useTriggers = true;
                 var overlaps = new Collider2D[8];
                 var hitCount = hitCollider.Overlap(filter, overlaps);

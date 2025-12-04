@@ -190,13 +190,26 @@ namespace HellTiles.Hazards
                 gridController.WalkableTilemap.SetTile(cell, null);
             }
 
-            StartCoroutine(RestoreAfterDelay());
+            // If object is inactive, StartCoroutine will fail. In that case restore immediately.
+            if (isActiveAndEnabled)
+            {
+                StartCoroutine(RestoreAfterDelay());
+            }
+            else
+            {
+                RestoreImmediate();
+            }
         }
 
         private IEnumerator RestoreAfterDelay()
         {
             yield return new WaitForSeconds(restoreDelay);
 
+            RestoreImmediate();
+        }
+
+        private void RestoreImmediate()
+        {
             if (gridController != null && originalTile != null)
             {
                 gridController.WalkableTilemap.SetTile(cell, originalTile);

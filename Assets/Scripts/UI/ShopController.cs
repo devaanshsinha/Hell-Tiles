@@ -35,6 +35,7 @@ namespace HellTiles.UI
 
         private void Start()
         {
+            EnsureDefaultOwnedAndEquipped();
             for (var i = 0; i < items.Length; i++)
             {
                 var owned = IsOwned(items[i].itemId);
@@ -185,11 +186,32 @@ namespace HellTiles.UI
             }
         }
 
+        private void EnsureDefaultOwnedAndEquipped()
+        {
+            if (items == null || items.Length == 0)
+            {
+                return;
+            }
+
+            var defaultId = items[0].itemId;
+            // Own the first skin by default.
+            PlayerPrefs.SetInt(GetOwnedKey(defaultId), 1);
+
+            // If nothing is equipped yet, equip the default.
+            var equipped = PlayerPrefs.GetString("hellTiles_equippedSkin", string.Empty);
+            if (string.IsNullOrWhiteSpace(equipped))
+            {
+                PlayerPrefs.SetString("hellTiles_equippedSkin", defaultId);
+            }
+
+            PlayerPrefs.Save();
+        }
+
         private void HandleCoinsChanged(int totalCoins)
         {
             if (infoLabel != null)
             {
-                infoLabel.text = $"Coins: {totalCoins}";
+                infoLabel.text = $"{totalCoins}";
             }
         }
 
