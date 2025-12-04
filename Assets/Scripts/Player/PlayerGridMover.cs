@@ -28,8 +28,12 @@ namespace HellTiles.Player
 
         private Vector3Int currentCell;
         private bool isMoving;
+        private Coroutine? moveRoutine;
 
         public bool IsMoving => isMoving;
+        public bool IsExternallyLocked => externalLockCount > 0;
+
+        private int externalLockCount;
         private void Awake()
         {
             if (gridController == null)
@@ -75,7 +79,7 @@ namespace HellTiles.Player
 
         private void Update()
         {
-            if (isMoving || moveAction == null || moveAction.action == null)
+            if (isMoving || IsExternallyLocked || moveAction == null || moveAction.action == null)
             {
                 return;
             }
@@ -118,6 +122,61 @@ namespace HellTiles.Player
             return true;
         }
 
+        /// <summary>
+        /// Interrupt any movement and shove the player immediately by one tile if walkable.
+        /// </summary>
+        public bool ForceImmediatePush(Vector3Int direction)
+        {
+            if (gridController == null)
+            {
+                return false;
+            }
+
+            StopCurrentMove();
+
+            // Re-evaluate current cell from world to avoid stale state mid-hop.
+            currentCell = gridController.WorldToCell(transform.position);
+            var targetCell = currentCell + direction;
+            if (!gridController.IsWalkable(targetCell))
+            {
+                return false;
+            }
+
+            var worldTarget = gridController.CellToWorldCenter(targetCell);
+            moveRoutine = StartCoroutine(HopTo(worldTarget, targetCell));
+            return true;
+        }
+
+        /// <summary>
+        /// Force a move and temporarily lock input until the shove finishes.
+        /// </summary>
+        public void ForceMoveWithLock(Vector3Int direction)
+        {
+            StartCoroutine(ForceMoveRoutine(direction));
+        }
+
+        private IEnumerator ForceMoveRoutine(Vector3Int direction)
+        {
+            // wait for any current hop to finish
+            while (isMoving)
+            {
+                yield return null;
+            }
+
+            externalLockCount++;
+            var success = TryForceMove(direction);
+
+            if (success)
+            {
+                while (isMoving)
+                {
+                    yield return null;
+                }
+            }
+
+            externalLockCount = Mathf.Max(0, externalLockCount - 1);
+        }
+
         private IEnumerator HopTo(Vector3 worldTarget, Vector3Int targetCell)
         {
             isMoving = true;
@@ -153,6 +212,7 @@ namespace HellTiles.Player
             }
 
             isMoving = false;
+            moveRoutine = null;
         }
 
         private void ApplyPosition(Vector3 position)
@@ -202,6 +262,17 @@ namespace HellTiles.Player
             }
 
             ApplyPosition(basePosition);
+        }
+
+        private void StopCurrentMove()
+        {
+            if (moveRoutine != null)
+            {
+                StopCoroutine(moveRoutine);
+                moveRoutine = null;
+            }
+
+            isMoving = false;
         }
     }
 }

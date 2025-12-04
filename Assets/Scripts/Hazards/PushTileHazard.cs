@@ -16,9 +16,11 @@ namespace HellTiles.Hazards
         [SerializeField, Tooltip("Seconds each harmless blink stays visible.")] private float telegraphBlinkOn = 0.2f;
         [SerializeField, Tooltip("Seconds each harmless blink stays invisible.")] private float telegraphBlinkOff = 0.2f;
         [SerializeField, Tooltip("Visible blinks before the pad becomes active.")] private int telegraphBlinkCount = 2;
+        [SerializeField, Tooltip("Seconds before this pad despawns, even if never stepped on.")] private float lifeTime = 8f;
         [SerializeField, Tooltip("Optional sprite renderer for telegraph.")] private SpriteRenderer? spriteRenderer;
         [SerializeField] private Collider2D? hitCollider;
 
+        private PushTileSpawner? spawner;
         private TileGridController? gridController;
         private Vector3Int cell;
         private bool isArmed;
@@ -26,11 +28,13 @@ namespace HellTiles.Hazards
         private float stateTimer;
         private int blinksCompleted;
         private PushDirection currentDirection;
+        private float aliveTimer;
 
-        public void Initialise(TileGridController grid, Vector3Int spawnCell)
+        public void Initialise(TileGridController grid, Vector3Int spawnCell, PushTileSpawner owner)
         {
             gridController = grid;
             cell = spawnCell;
+            spawner = owner;
             currentDirection = direction;
 
             if (spriteRenderer == null)
@@ -52,11 +56,19 @@ namespace HellTiles.Hazards
             isVisible = false;
             stateTimer = 0f;
             blinksCompleted = 0;
+            aliveTimer = 0f;
             SetVisible(false);
         }
 
         private void Update()
         {
+            aliveTimer += Time.deltaTime;
+            if (aliveTimer >= lifeTime)
+            {
+                Despawn();
+                return;
+            }
+
             if (!isArmed)
             {
                 RunTelegraph();
@@ -110,7 +122,7 @@ namespace HellTiles.Hazards
             }
 
             var offset = DirectionToOffset(currentDirection);
-            StartCoroutine(PushWhenReady(mover, offset));
+            mover.ForceImmediatePush(offset);
         }
 
         private Vector3Int DirectionToOffset(PushDirection dir)
@@ -129,18 +141,10 @@ namespace HellTiles.Hazards
             currentDirection = newDirection;
         }
 
-        private IEnumerator PushWhenReady(PlayerGridMover mover, Vector3Int offset)
+        private void Despawn()
         {
-            // Wait for the player to finish their current hop so the shove always applies.
-            while (mover != null && mover.IsMoving)
-            {
-                yield return null;
-            }
-
-            if (mover != null)
-            {
-                mover.TryForceMove(offset);
-            }
+            spawner?.HandlePadDespawn(cell, this);
+            Destroy(gameObject);
         }
 
         private void SetVisible(bool visible)

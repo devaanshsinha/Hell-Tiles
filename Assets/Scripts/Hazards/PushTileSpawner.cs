@@ -91,7 +91,7 @@ namespace HellTiles.Hazards
                 }
 
                 var pad = Instantiate(pushPrefab, gridController.CellToWorldCenter(cell), Quaternion.identity, transform);
-                pad.Initialise(gridController, cell);
+                pad.Initialise(gridController, cell, this);
 
                 // Pick direction randomly and set sprite if provided.
                 var dirIndex = Random.Range(0, 4);
@@ -126,6 +126,14 @@ namespace HellTiles.Hazards
         {
             var setter = pad as IPushPadConfigurable;
             setter?.SetDirection(direction);
+        }
+
+        public void HandlePadDespawn(Vector3Int cell, PushTileHazard pad)
+        {
+            if (activePads.TryGetValue(cell, out var existing) && existing == pad)
+            {
+                activePads.Remove(cell);
+            }
         }
     }
 

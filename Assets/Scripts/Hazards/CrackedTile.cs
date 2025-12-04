@@ -33,6 +33,9 @@ namespace HellTiles.Hazards
         private bool isArmed;
         private bool isBroken;
         private bool playerOnTile;
+        private Collider2D? trackedPlayer;
+        private float armedTimer;
+        [SerializeField, Tooltip("Seconds the armed tile stays if never stepped on (restores afterward).")] private float passiveLifetime = 12f;
 
         public void Initialise(CrackedTileSpawner owner, TileGridController grid, Vector3Int spawnCell, TileBase crackedTile)
         {
@@ -62,6 +65,7 @@ namespace HellTiles.Hazards
             isArmed = false;
             isBroken = false;
             playerOnTile = false;
+            armedTimer = 0f;
             SetTelegraphVisible(false);
 
             if (gridController != null)
@@ -81,6 +85,17 @@ namespace HellTiles.Hazards
             {
                 RunTelegraph();
                 return;
+            }
+
+            CheckPlayerPresence(); // monitor player leaving the tile
+
+            if (!isBroken)
+            {
+                armedTimer += Time.deltaTime;
+                if (armedTimer >= passiveLifetime)
+                {
+                    RestoreWithoutBreak();
+                }
             }
         }
 
@@ -139,6 +154,7 @@ namespace HellTiles.Hazards
             }
 
             playerOnTile = true;
+            trackedPlayer = other;
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -155,6 +171,7 @@ namespace HellTiles.Hazards
             }
 
             playerOnTile = false;
+            trackedPlayer = null;
             BreakTile(); // breaks once the player leaves after first entry
         }
 
@@ -187,6 +204,53 @@ namespace HellTiles.Hazards
 
             spawner?.HandleCrackedTileDespawn(cell, this);
             Destroy(gameObject);
+        }
+
+        private void RestoreWithoutBreak()
+        {
+            if (gridController != null && originalTile != null)
+            {
+                gridController.WalkableTilemap.SetTile(cell, originalTile);
+            }
+
+            spawner?.HandleCrackedTileDespawn(cell, this);
+            Destroy(gameObject);
+        }
+
+        private void CheckPlayerPresence()
+        {
+            if (!isArmed || isBroken || gridController == null)
+            {
+                return;
+            }
+
+            // If we still have a tracked player collider and it touches, keep it armed.
+            if (trackedPlayer != null && hitCollider != null && hitCollider.IsTouching(trackedPlayer))
+            {
+                playerOnTile = true;
+                return;
+            }
+
+            // Otherwise, poll at the tile center for any player.
+            var center = gridController.CellToWorldCenter(cell);
+            var hits = Physics2D.OverlapPointAll(center);
+            foreach (var hit in hits)
+            {
+                var health = hit.GetComponent<PlayerHealth>() ?? hit.GetComponentInParent<PlayerHealth>();
+                if (health != null)
+                {
+                    playerOnTile = true;
+                    trackedPlayer = hit;
+                    return;
+                }
+            }
+
+            if (playerOnTile)
+            {
+                playerOnTile = false;
+                trackedPlayer = null;
+                BreakTile();
+            }
         }
 
         private void SetTelegraphVisible(bool visible)
