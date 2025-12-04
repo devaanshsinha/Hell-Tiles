@@ -42,6 +42,10 @@ Playable prototype is live. Scene flow now spans **New Game → Tutorial → Sam
     - `RowSweepTrack`: side-originating spray that clears a whole row (row/column ranges configurable).
   - `BasicProjectile`: moves forward or homes, self-limits via `ProjectileRegistry`.
 
+- **Hazards**
+  - `SpikeSpawner` + `SpikeHazard`: blinks twice harmlessly, then stays visible/dangerous for its active window; damages on contact but does not despawn on hit.
+  - `CrackedTileSpawner` + `CrackedTile`: telegraphs with harmless blinks, arms, then breaks the tile the first time the player steps on it. The tile is removed for a set delay (default 10s) and then the original tile is restored.
+
 - **Pickups**
   - `HeartSpawner` + `HeartPickup`: spawns on random walkable tiles; collectable even at max hearts (wasted). Lives 2.5s, flickers 1.5s, then despawns.
   - `CoinSpawner` + `CoinPickup`: animated coin, flickers before despawn. Increments `CoinWallet` (persistent).
@@ -67,6 +71,7 @@ Playable prototype is live. Scene flow now spans **New Game → Tutorial → Sam
 - **Tiles:** `TileGridController` (walkable queries, bounce).
 - **Player:** `PlayerGridMover` (hops), `PlayerHealth` (hearts, blink, death).
 - **Projectiles:** `BasicProjectile`, `ProjectileSpawner`, `HomingProjectileTrack`, `ArrowProjectileTrack`, `RowSweepTrack`, `ProjectileDirector`, `ProjectileRegistry`, `IProjectileTrack`, `RowSweepHazard`.
+- **Hazards:** `SpikeHazard`, `SpikeSpawner`, `CrackedTile`, `CrackedTileSpawner`.
 - **Powerups:** `HeartPickup`, `HeartSpawner`, `CoinPickup`, `CoinSpawner`.
 - **UI / Flow:** `NewGameSceneController`, `TutorialSceneController`, `GameOverSceneController`, `CountdownController`, `SurvivalTimer`, `CoinCounter`, `CoinWallet`, `GameSessionData`, `ShopController`, `LevelSelectController`.
 
