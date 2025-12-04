@@ -21,6 +21,12 @@ namespace HellTiles.Powerups
         private readonly List<Vector3Int> walkableCells = new();
         private float timer;
 
+        public float SpawnInterval
+        {
+            get => spawnInterval;
+            set => spawnInterval = Mathf.Max(0.01f, value);
+        }
+
         private void Start()
         {
             timer = initialDelay;

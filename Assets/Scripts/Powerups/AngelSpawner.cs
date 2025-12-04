@@ -94,7 +94,7 @@ namespace HellTiles.Powerups
         private System.Collections.IEnumerator DespawnAfterDelay(AngelPickup angel, float delay)
         {
             yield return new WaitForSeconds(delay);
-            if (activeAngel == angel)
+            if (activeAngel != null && activeAngel == angel)
             {
                 Destroy(activeAngel.gameObject);
                 activeAngel = null;

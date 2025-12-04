@@ -18,6 +18,12 @@ namespace HellTiles.Hazards
         private readonly List<Vector3Int> walkableCells = new();
         private float spawnTimer;
 
+        public float SpawnInterval
+        {
+            get => spawnInterval;
+            set => spawnInterval = Mathf.Max(0.01f, value);
+        }
+
         private void Awake()
         {
             if (gridController == null)

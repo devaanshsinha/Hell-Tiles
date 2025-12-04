@@ -20,6 +20,9 @@ Playable prototype is live. Scene flow now spans **New Game → Tutorial → Sam
   - `S` → `Shop` scene.
 - **Tutorial** (`TutorialSceneController`): `Space` starts `SampleScene`.
 - **LevelSelect** (`LevelSelectController`): Mario-style path. `A/D` move left/right along bases, `W/S` climb to level nodes, `Enter` loads the selected level, `Escape` returns to New Game. Requires a cursor object, player visual, and an ordered list of base nodes (with optional elevated child nodes for levels).
+  - Unlocks: node 0 (origin) always unlocked; level nodes unlock when the previous node is completed; spacer nodes (no level) become unlocked when the previous node is completed/unlocked. Completion flags stored in `hellTiles_level_{index}_completed` (PlayerPrefs).
+  - Checkmarks: assign per-level `Completed Mark` GameObject; only real level nodes need them.
+  - Message: assign TMP text to `messageLabel`, keep it inactive; shows “Complete previous level first” when blocked.
 - **SampleScene**: Core gameplay (see Systems below). On death, `PlayerHealth` loads `Game Over`.
 - **Game Over** (`GameOverSceneController`): Shows last score and best score; `Space` returns to `New Game`.
 - **Shop** (`ShopController`): Five horizontal tiles. `A/D` to change selection, `Enter` to buy (deducts from `CoinWallet`), `E` to equip owned skin, `Escape` returns to `New Game`. Badges: “Owned” and “Equipped” highlights per tile.
@@ -76,7 +79,7 @@ Playable prototype is live. Scene flow now spans **New Game → Tutorial → Sam
 - **Projectiles:** `BasicProjectile`, `ProjectileSpawner`, `HomingProjectileTrack`, `ArrowProjectileTrack`, `RowSweepTrack`, `ProjectileDirector`, `ProjectileRegistry`, `IProjectileTrack`, `RowSweepHazard`.
 - **Hazards:** `SpikeHazard`, `SpikeSpawner`, `CrackedTile`, `CrackedTileSpawner`.
 - **Powerups:** `HeartPickup`, `HeartSpawner`, `CoinPickup`, `CoinSpawner`.
-- **UI / Flow:** `NewGameSceneController`, `TutorialSceneController`, `GameOverSceneController`, `CountdownController`, `SurvivalTimer`, `CoinCounter`, `CoinWallet`, `GameSessionData`, `ShopController`, `LevelSelectController`, `LevelCompletionTracker` (marks level complete; can return to LevelSelect), `LevelCountdownTimer` (auto-marks completion via tracker and loads Win scene on timeout).
+- **UI / Flow:** `NewGameSceneController`, `TutorialSceneController`, `GameOverSceneController`, `CountdownController`, `SurvivalTimer`, `CoinCounter`, `CoinWallet`, `GameSessionData`, `ShopController`, `LevelSelectController`, `LevelCompletionTracker` (marks level complete; can return to LevelSelect), `LevelCountdownTimer` (auto-marks completion via tracker and loads Win scene on timeout), `SpaceToScene`.
 
 ---
 
