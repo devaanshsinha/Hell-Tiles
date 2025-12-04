@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 #nullable enable
 
@@ -30,6 +32,7 @@ namespace HellTiles.UI
         [SerializeField] private TMP_Text? infoLabel;
         [SerializeField] private string menuSceneName = "New Game";
         [SerializeField] private KeyCode exitKey = KeyCode.Escape;
+        [SerializeField, Tooltip("Parent layout RectTransform (e.g., the container with Grid/Horizontal/Vertical Layout). Optional but helps force layout before showing highlight.")] private RectTransform? layoutRoot;
 
         private int currentIndex;
 
@@ -40,8 +43,9 @@ namespace HellTiles.UI
                 return;
             }
 
+            currentIndex = Mathf.Clamp(currentIndex, 0, items.Length - 1);
             EnsureDefaultOwnedAndEquipped();
-            RefreshSelection();
+            StartCoroutine(InitHighlight());
         }
 
         private void Start()
@@ -195,6 +199,45 @@ namespace HellTiles.UI
                         ? "Owned"
                         : $"{view.cost} coins";
             }
+        }
+
+        private void ForceSelectorVisible()
+        {
+            if (items == null || items.Length == 0)
+            {
+                return;
+            }
+
+            var view = items[Mathf.Clamp(currentIndex, 0, items.Length - 1)];
+            if (view.selectorHighlight != null)
+            {
+                // Toggle to force UI update in WebGL
+                view.selectorHighlight.SetActive(false);
+                view.selectorHighlight.SetActive(true);
+
+                var graphic = view.selectorHighlight.GetComponent<UnityEngine.UI.Graphic>();
+                if (graphic != null)
+                {
+                    var c = graphic.color;
+                    c.a = 1f;
+                    graphic.color = c;
+                    graphic.enabled = true;
+                }
+            }
+        }
+
+        private IEnumerator InitHighlight()
+        {
+            // Wait a frame so layout groups finish positioning children (important for WebGL).
+            yield return null;
+
+            if (layoutRoot != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(layoutRoot);
+            }
+
+            RefreshSelection();
+            ForceSelectorVisible();
         }
 
         private void EnsureDefaultOwnedAndEquipped()
