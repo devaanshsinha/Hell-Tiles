@@ -28,6 +28,8 @@ namespace HellTiles.Player
 
         private Vector3Int currentCell;
         private bool isMoving;
+
+        public bool IsMoving => isMoving;
         private void Awake()
         {
             if (gridController == null)
@@ -93,6 +95,27 @@ namespace HellTiles.Player
 
             var worldTarget = gridController.CellToWorldCenter(targetCell);
             StartCoroutine(HopTo(worldTarget, targetCell));
+        }
+
+        /// <summary>
+        /// External caller (e.g., hazards) can force a one-tile move if possible.
+        /// </summary>
+        public bool TryForceMove(Vector3Int direction)
+        {
+            if (isMoving || gridController == null)
+            {
+                return false;
+            }
+
+            var targetCell = currentCell + direction;
+            if (!gridController.IsWalkable(targetCell))
+            {
+                return false;
+            }
+
+            var worldTarget = gridController.CellToWorldCenter(targetCell);
+            StartCoroutine(HopTo(worldTarget, targetCell));
+            return true;
         }
 
         private IEnumerator HopTo(Vector3 worldTarget, Vector3Int targetCell)

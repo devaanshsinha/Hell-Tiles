@@ -45,6 +45,7 @@ Playable prototype is live. Scene flow now spans **New Game → Tutorial → Sam
 - **Hazards**
   - `SpikeSpawner` + `SpikeHazard`: blinks twice harmlessly, then stays visible/dangerous for its active window; damages on contact but does not despawn on hit.
   - `CrackedTileSpawner` + `CrackedTile`: blinks three times to arm, lets the player stand once, then breaks when the player leaves that tile. The tile is removed for a set delay (default ~10s) and restored after the delay, blocking that path while missing.
+  - `PushTileSpawner` + `PushTileHazard`: blinks in, then pushes the player one tile in its arrow direction on contact. Direction set per instance (Up/Down/Left/Right) with matching sprites.
 
 - **Pickups**
   - `HeartSpawner` + `HeartPickup`: spawns on random walkable tiles; collectable even at max hearts (wasted). Lives 2.5s, flickers 1.5s, then despawns.
