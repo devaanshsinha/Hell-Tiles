@@ -107,5 +107,17 @@ namespace HellTiles.Hazards
                 activeTiles.Remove(cell);
             }
         }
+
+        public void ClearAll()
+        {
+            foreach (var kvp in activeTiles)
+            {
+                if (kvp.Value != null)
+                {
+                    Destroy(kvp.Value.gameObject);
+                }
+            }
+            activeTiles.Clear();
+        }
     }
 }

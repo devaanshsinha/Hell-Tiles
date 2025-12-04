@@ -21,6 +21,7 @@ namespace HellTiles.Tiles
         private readonly HashSet<TileBase> walkableTileSet = new();
         private readonly HashSet<TileBase> blockedTileSet = new();
         private readonly Dictionary<Vector3Int, Coroutine> activeTileTweens = new();
+        private readonly Dictionary<Vector3Int, TileBase?> originalTiles = new();
 
         public Tilemap WalkableTilemap => walkableTilemap;
 
@@ -31,6 +32,8 @@ namespace HellTiles.Tiles
             {
                 grid = GetComponentInParent<Grid>();
             }
+
+            CacheOriginalTiles();
         }
 
         private void OnValidate()
@@ -63,6 +66,32 @@ namespace HellTiles.Tiles
                         blockedTileSet.Add(tile);
                     }
                 }
+            }
+        }
+
+        private void CacheOriginalTiles()
+        {
+            originalTiles.Clear();
+            foreach (var position in walkableTilemap.cellBounds.allPositionsWithin)
+            {
+                originalTiles[position] = walkableTilemap.GetTile(position);
+            }
+        }
+
+        /// <summary>
+        /// Reset walkable tilemap back to its original layout captured on Awake.
+        /// </summary>
+        public void ResetToOriginalLayout()
+        {
+            if (originalTiles.Count == 0)
+            {
+                CacheOriginalTiles();
+            }
+
+            foreach (var position in walkableTilemap.cellBounds.allPositionsWithin)
+            {
+                walkableTilemap.SetTile(position, originalTiles.TryGetValue(position, out var t) ? t : null);
+                walkableTilemap.SetTransformMatrix(position, Matrix4x4.identity);
             }
         }
 

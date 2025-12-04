@@ -99,5 +99,17 @@ namespace HellTiles.Hazards
                 activeSpikes.Remove(cell);
             }
         }
+
+        public void ClearAll()
+        {
+            foreach (var kvp in activeSpikes)
+            {
+                if (kvp.Value != null)
+                {
+                    Destroy(kvp.Value.gameObject);
+                }
+            }
+            activeSpikes.Clear();
+        }
     }
 }

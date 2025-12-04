@@ -69,6 +69,25 @@ namespace HellTiles.Player
             return true;
         }
 
+        public void RestoreFullHealth()
+        {
+            CurrentHearts = maxHearts;
+            RefreshHeartUI();
+
+            if (invulnerabilityRoutine != null)
+            {
+                StopCoroutine(invulnerabilityRoutine);
+                invulnerabilityRoutine = null;
+            }
+
+            if (playerSprite != null)
+            {
+                playerSprite.color = defaultColor;
+            }
+
+            isInvulnerable = false;
+        }
+
         private void OnDisable()
         {
             if (invulnerabilityRoutine != null)

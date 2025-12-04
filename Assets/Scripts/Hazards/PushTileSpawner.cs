@@ -135,6 +135,18 @@ namespace HellTiles.Hazards
                 activePads.Remove(cell);
             }
         }
+
+        public void ClearAll()
+        {
+            foreach (var kvp in activePads)
+            {
+                if (kvp.Value != null)
+                {
+                    Destroy(kvp.Value.gameObject);
+                }
+            }
+            activePads.Clear();
+        }
     }
 
     public interface IPushPadConfigurable

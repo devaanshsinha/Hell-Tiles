@@ -44,8 +44,9 @@ Playable prototype is live. Scene flow now spans **New Game → Tutorial → Sam
 
 - **Hazards**
   - `SpikeSpawner` + `SpikeHazard`: blinks twice harmlessly, then stays visible/dangerous for its active window; damages on contact but does not despawn on hit.
-  - `CrackedTileSpawner` + `CrackedTile`: blinks three times to arm, lets the player stand once, then breaks when the player leaves that tile. The tile is removed for a set delay (default ~10s) and restored after the delay, blocking that path while missing.
-  - `PushTileSpawner` + `PushTileHazard`: blinks in, then pushes the player one tile in its arrow direction on contact. Direction set per instance (Up/Down/Left/Right) with matching sprites.
+  - `CrackedTileSpawner` + `CrackedTile`: blinks three times to arm, lets the player stand once, then breaks when the player leaves that tile. The tile is removed for a set delay (default ~10s) and restored after the delay, blocking that path while missing. If never stepped on, it auto-restores after a passive lifetime.
+  - `PushTileSpawner` + `PushTileHazard`: blinks in, then immediately pushes the player one tile in its arrow direction on contact. Direction set per instance (Up/Down/Left/Right) with matching sprites; pads despawn after their lifetime even if untouched.
+  - `AngelSpawner` + `AngelPickup`: spawns every 15–25s, despawns after 5s if untouched. On pickup: clears all projectiles, resets walkable tiles to their original layout, clears spike/push/cracked hazards, resets player health to full, and plays a short ring VFX at the pickup spot.
 
 - **Pickups**
   - `HeartSpawner` + `HeartPickup`: spawns on random walkable tiles; collectable even at max hearts (wasted). Lives 2.5s, flickers 1.5s, then despawns.
