@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using HellTiles.UI;
+using HellTiles.Audio;
 
 #nullable enable
 
@@ -23,6 +24,8 @@ namespace HellTiles.Player
         [SerializeField, Tooltip("Seconds spent invulnerable after taking damage.")] private float invulnerabilityDuration = 1.5f;
         [SerializeField, Tooltip("How many visible flashes to play while invulnerable.")] private int blinkCount = 3;
         [SerializeField, Tooltip("Scene to load when all hearts are lost.")] private string gameOverSceneName = "Game Over";
+        [SerializeField, Tooltip("Sound played when taking damage.")] private AudioClip? damageSfx;
+        [SerializeField, Range(0f, 1f)] private float damageSfxVolume = 1f;
 
         [Header("UI")]
         [SerializeField] private List<Image> heartIcons = new();
@@ -113,6 +116,8 @@ namespace HellTiles.Player
 
             CurrentHearts = Mathf.Max(0, CurrentHearts - 1);
             RefreshHeartUI();
+
+            OneShotAudio.Play2D(damageSfx, damageSfxVolume);
 
             if (invulnerabilityRoutine != null)
             {

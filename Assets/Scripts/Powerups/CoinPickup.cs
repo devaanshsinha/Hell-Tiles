@@ -1,5 +1,6 @@
 using UnityEngine;
 using HellTiles.UI;
+using HellTiles.Audio;
 
 #nullable enable
 
@@ -15,6 +16,8 @@ namespace HellTiles.Powerups
         [SerializeField] private float lifetime = 6f;
         [SerializeField] private float flickerDuration = 1f;
         [SerializeField] private SpriteRenderer? spriteRenderer;
+        [SerializeField, Tooltip("Sound to play when the coin is collected.")] private AudioClip? coinSfx;
+        [SerializeField, Range(0f, 1f)] private float coinSfxVolume = 1f;
 
         private float elapsed;
         private float flickerStart;
@@ -56,6 +59,7 @@ namespace HellTiles.Powerups
             }
 
             CoinWallet.AddCoins(coinValue); // persistently add to wallet
+            OneShotAudio.Play2D(coinSfx, coinSfxVolume);
             Destroy(gameObject);
         }
     }

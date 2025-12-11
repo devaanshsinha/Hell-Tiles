@@ -4,6 +4,7 @@ using HellTiles.Player;
 using HellTiles.Projectiles;
 using HellTiles.Tiles;
 using HellTiles.Hazards;
+using HellTiles.Audio;
 
 #nullable enable
 
@@ -14,6 +15,8 @@ namespace HellTiles.Powerups
     {
         [SerializeField] private GameObject? ringVfxPrefab;
         [SerializeField, Tooltip("Seconds before the ring VFX self-destroys.")] private float ringLifetime = 0.42f;
+        [SerializeField, Tooltip("Sound to play when the angel is collected.")] private AudioClip? angelSfx;
+        [SerializeField, Range(0f, 1f)] private float angelSfxVolume = 1f;
 
         private AngelSpawner? spawner;
         private TileGridController? gridController;
@@ -102,6 +105,8 @@ namespace HellTiles.Powerups
                 var vfx = Instantiate(ringVfxPrefab, transform.position, Quaternion.identity);
                 Destroy(vfx, ringLifetime); // ensure VFX cleans up even after this pickup is destroyed
             }
+
+            OneShotAudio.Play2D(angelSfx, angelSfxVolume);
 
             // Notify spawner and destroy self.
             spawner?.HandleCollected(this);

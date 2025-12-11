@@ -124,6 +124,7 @@ namespace HellTiles.Hazards
             var offset = DirectionToOffset(currentDirection);
             var targetCell = cell + offset;
 
+            // Only push if target is walkable; otherwise do nothing (prevents out-of-bounds pushes).
             if (gridController != null && gridController.IsWalkable(targetCell))
             {
                 mover.ForceMoveWithLockToCell(targetCell);

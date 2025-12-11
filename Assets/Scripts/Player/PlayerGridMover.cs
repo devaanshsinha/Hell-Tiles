@@ -117,7 +117,7 @@ namespace HellTiles.Player
                 return;
             }
 
-            // If we're moving or externally locked, buffer the latest direction.
+            // If we're mid-hop or externally locked, buffer the latest direction so it fires next.
             if (isMoving || IsExternallyLocked)
             {
                 hasBufferedInput = true;
