@@ -35,6 +35,7 @@ namespace HellTiles.UI
         [SerializeField, Tooltip("Parent layout RectTransform (e.g., the container with Grid/Horizontal/Vertical Layout). Optional but helps force layout before showing highlight.")] private RectTransform? layoutRoot;
 
         private int currentIndex;
+        private float _forceTimer;
 
         private void OnEnable()
         {
@@ -71,6 +72,12 @@ namespace HellTiles.UI
             if (items.Length == 0)
             {
                 return;
+            }
+
+            if (_forceTimer > 0f)
+            {
+                _forceTimer -= Time.unscaledDeltaTime;
+                ForceSelectorVisible();
             }
 
             if (Input.GetKeyDown(moveLeftKey))
@@ -215,6 +222,15 @@ namespace HellTiles.UI
                 view.selectorHighlight.SetActive(false);
                 view.selectorHighlight.SetActive(true);
 
+                // Ensure RectTransform is properly anchored if it got messed up by layout
+                var rt = view.selectorHighlight.GetComponent<RectTransform>();
+                if (rt != null)
+                {
+                    rt.localScale = Vector3.one;
+                    // Optional: if you want it to fill the parent, reset anchors/offsets.
+                    // Assuming the prefab is set up correctly, we might just want to ensure scale is 1.
+                }
+
                 var graphic = view.selectorHighlight.GetComponent<UnityEngine.UI.Graphic>();
                 if (graphic != null)
                 {
@@ -222,18 +238,34 @@ namespace HellTiles.UI
                     c.a = 1f;
                     graphic.color = c;
                     graphic.enabled = true;
+                    graphic.SetAllDirty();
+
+                    if (_forceTimer > 0.4f) // Log only on the first few frames of forcing
+                    {
+                         var rect = view.selectorHighlight.GetComponent<RectTransform>();
+                         Debug.Log($"[ShopController] Selector Force: Active={view.selectorHighlight.activeInHierarchy}, " +
+                                   $"Alpha={c.a}, Rect={rect.rect}, Scale={rect.localScale}, Pos={rect.anchoredPosition}");
+                    }
                 }
             }
         }
 
         private IEnumerator InitHighlight()
         {
-            // Wait a frame so layout groups finish positioning children (important for WebGL).
-            yield return null;
+            // Wait a small delay so layout groups finish positioning children (important for WebGL).
+            // Use Realtime to avoid Time.timeScale issues.
+            yield return new WaitForSecondsRealtime(0.1f);
+
+            _forceTimer = 0.5f; // Force visibility for 0.5s
+            Canvas.ForceUpdateCanvases();
 
             if (layoutRoot != null)
             {
                 LayoutRebuilder.ForceRebuildLayoutImmediate(layoutRoot);
+            }
+            else
+            {
+                Debug.LogWarning("[ShopController] layoutRoot is not assigned; layout rebuild might be skipped.");
             }
 
             RefreshSelection();

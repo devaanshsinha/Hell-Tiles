@@ -122,7 +122,12 @@ namespace HellTiles.Hazards
             }
 
             var offset = DirectionToOffset(currentDirection);
-            mover.ForceImmediatePush(offset);
+            var targetCell = cell + offset;
+
+            if (gridController != null && gridController.IsWalkable(targetCell))
+            {
+                mover.ForceMoveWithLockToCell(targetCell);
+            }
         }
 
         private Vector3Int DirectionToOffset(PushDirection dir)

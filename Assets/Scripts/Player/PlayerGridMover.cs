@@ -29,7 +29,8 @@ namespace HellTiles.Player
         private Vector3Int currentCell;
         private bool isMoving;
         private Coroutine? moveRoutine;
-
+        private bool hasBufferedInput;
+        private Vector3Int bufferedDirection;
         public bool IsMoving => isMoving;
         public bool IsExternallyLocked => externalLockCount > 0;
 
@@ -45,6 +46,25 @@ namespace HellTiles.Player
             {
                 body2D = GetComponent<Rigidbody2D>();
             }
+        }
+
+        private void TryConsumeBufferedInput()
+        {
+            if (!hasBufferedInput || gridController == null)
+            {
+                return;
+            }
+
+            var targetCell = currentCell + bufferedDirection;
+            hasBufferedInput = false;
+
+            if (!gridController.IsWalkable(targetCell))
+            {
+                return;
+            }
+
+            var worldTarget = gridController.CellToWorldCenter(targetCell);
+            moveRoutine = StartCoroutine(HopTo(worldTarget, targetCell));
         }
 
         private void OnEnable()
@@ -79,15 +99,29 @@ namespace HellTiles.Player
 
         private void Update()
         {
-            if (isMoving || IsExternallyLocked || moveAction == null || moveAction.action == null)
+            if (moveAction == null || moveAction.action == null)
             {
                 return;
             }
 
-            var input = moveAction.action.ReadValue<Vector2>(); // read WASD / stick
+            var action = moveAction.action;
+            if (!action.WasPressedThisFrame())
+            {
+                return;
+            }
+
+            var input = action.ReadValue<Vector2>(); // read WASD / stick
             var direction = ResolveCardinalDirection(input);
             if (direction == Vector3Int.zero)
             {
+                return;
+            }
+
+            // If we're moving or externally locked, buffer the latest direction.
+            if (isMoving || IsExternallyLocked)
+            {
+                hasBufferedInput = true;
+                bufferedDirection = direction;
                 return;
             }
 
@@ -177,6 +211,58 @@ namespace HellTiles.Player
             externalLockCount = Mathf.Max(0, externalLockCount - 1);
         }
 
+        /// <summary>
+        /// Force an immediate shove to a specific cell if walkable; cancels current motion.
+        /// </summary>
+        public bool ForceImmediatePushToCell(Vector3Int targetCell)
+        {
+            if (gridController == null)
+            {
+                return false;
+            }
+
+            StopCurrentMove();
+            currentCell = gridController.WorldToCell(transform.position);
+
+            if (!gridController.IsWalkable(targetCell))
+            {
+                return false;
+            }
+
+            var worldTarget = gridController.CellToWorldCenter(targetCell);
+            moveRoutine = StartCoroutine(HopTo(worldTarget, targetCell));
+            return true;
+        }
+
+        /// <summary>
+        /// Force a shove to a specific cell and lock input until it completes.
+        /// </summary>
+        public void ForceMoveWithLockToCell(Vector3Int targetCell)
+        {
+            StartCoroutine(ForceMoveToCellRoutine(targetCell));
+        }
+
+        private IEnumerator ForceMoveToCellRoutine(Vector3Int targetCell)
+        {
+            while (isMoving)
+            {
+                yield return null;
+            }
+
+            externalLockCount++;
+            var success = ForceImmediatePushToCell(targetCell);
+
+            if (success)
+            {
+                while (isMoving)
+                {
+                    yield return null;
+                }
+            }
+
+            externalLockCount = Mathf.Max(0, externalLockCount - 1);
+        }
+
         private IEnumerator HopTo(Vector3 worldTarget, Vector3Int targetCell)
         {
             isMoving = true;
@@ -213,6 +299,7 @@ namespace HellTiles.Player
 
             isMoving = false;
             moveRoutine = null;
+            TryConsumeBufferedInput();
         }
 
         private void ApplyPosition(Vector3 position)
